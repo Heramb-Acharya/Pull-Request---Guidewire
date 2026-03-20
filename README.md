@@ -1,4 +1,4 @@
-# GigShield — AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
+# GigShield: AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
 
 > **Guidewire DEVTrails 2026** | Phase 1 Submission
 
@@ -7,142 +7,143 @@
 ## Table of Contents
 
 1. [Problem Statement](#1-problem-statement)
-2. [Our Persona — Arjun, Q-Commerce Delivery Partner](#2-our-persona)
-3. [Solution Overview — GigShield](#3-solution-overview)
-4. [Persona-Based Scenarios & Application Workflow](#4-scenarios--workflow)
+2. [Our Persona](#2-our-persona)
+3. [Solution Overview](#3-solution-overview)
+4. [Persona-Based Scenarios and Application Workflow](#4-scenarios-and-workflow)
 5. [Weekly Premium Model](#5-weekly-premium-model)
 6. [Parametric Triggers](#6-parametric-triggers)
 7. [AI/ML Integration Plan](#7-aiml-integration-plan)
 8. [Fraud Detection System](#8-fraud-detection-system)
-9. [Tech Stack & Development Plan](#9-tech-stack--development-plan)
-10. [Deliverables Roadmap](#10-deliverables-roadmap)
+9. [Adversarial Defense and Anti-Spoofing Strategy](#9-adversarial-defense-and-anti-spoofing-strategy)
+10. [Tech Stack and Development Plan](#10-tech-stack-and-development-plan)
+11. [Deliverables Roadmap](#11-deliverables-roadmap)
 
 ---
 
 ## 1. Problem Statement
 
-India's Q-Commerce delivery partners — riders working for **Zepto** and **Blinkit** — are among the most economically vulnerable workers in the gig economy. Unlike food delivery riders who can roam across a city, Q-Commerce workers are locked to a **hyperlocal zone** (2–3 km radius) around a single dark store. This creates a unique and severe income risk:
+India's Q-Commerce delivery partners, riders working for Zepto and Blinkit, are among the most economically vulnerable workers in the gig economy. Unlike food delivery riders who can roam across a city, Q-Commerce workers are locked to a hyperlocal zone (2-3 km radius) around a single dark store. This creates a unique and severe income risk:
 
-- A single flood, cyclone alert, extreme heat event, or civic shutdown can eliminate **100% of a day's earnings** instantly
-- Workers earn **₹700–900 on good days** and **₹0 on bad days** — with no way to recover lost hours
-- Chennai's geography makes this especially acute: the northeast monsoon (Oct–Dec), Bay of Bengal cyclones, and April–June heat waves routinely disrupt the OMR/Velachery/Sholinganallur corridor — exactly where Q-Commerce dark stores are concentrated
-- **Currently, no insurance product exists** that addresses this specific, parametric, income-loss risk for Q-Commerce workers
+- A single flood, cyclone alert, extreme heat event, or civic shutdown can eliminate 100% of a day's earnings instantly
+- Workers earn Rs.700-900 on good days and Rs.0 on bad days, with no way to recover lost hours
+- Chennai's geography makes this especially acute: the northeast monsoon (Oct-Dec), Bay of Bengal cyclones, and April-June heat waves routinely disrupt the OMR/Velachery/Sholinganallur corridor, exactly where Q-Commerce dark stores are concentrated
+- Currently, no insurance product exists that addresses this specific, parametric, income-loss risk for Q-Commerce workers
 
-> We are insuring **lost income only** — not vehicles, not health, not accidents. This is a pure parametric income safety net.
+We are insuring lost income only, not vehicles, not health, not accidents. This is a pure parametric income safety net.
 
 ---
 
-## 2. Our Persona — Arjun, Q-Commerce Delivery Partner
+## 2. Our Persona
+
+**Arjun, 26, Q-Commerce Delivery Partner, Chennai**
 
 | Attribute | Detail |
 |---|---|
-| **Name** | Arjun, 26 |
-| **City** | Chennai |
-| **Platforms** | Zepto (primary) + Blinkit (secondary) |
-| **Home zone** | Velachery / Sholinganallur |
-| **Vehicle** | Electric 2-wheeler |
-| **Experience** | 2 years on platform |
-| **Daily earnings (good day)** | ₹700–₹900 (18–25 deliveries × ₹30–45) |
-| **Daily earnings (disrupted day)** | ₹0–₹150 |
-| **Weekly earnings** | ₹4,500–₹6,000 |
-| **Savings / safety net** | None |
+| Platforms | Zepto (primary) + Blinkit (secondary) |
+| Home zone | Velachery / Sholinganallur |
+| Vehicle | Electric 2-wheeler |
+| Experience | 2 years on platform |
+| Daily earnings (good day) | Rs.700-900 (18-25 deliveries x Rs.30-45) |
+| Daily earnings (disrupted day) | Rs.0-150 |
+| Weekly earnings | Rs.4,500-6,000 |
+| Savings / safety net | None |
 
 ### Arjun's Daily Schedule
 
 ```
-08:00 ──── [09:00-11:00 PEAK] ──── [12:00-17:00 LULL] ──── [18:00-21:00 PEAK] ──── 23:00
+08:00 ---- [09:00-11:00 PEAK] ---- [12:00-17:00 LULL] ---- [18:00-21:00 PEAK] ---- 23:00
 ```
 
-Peak hours generate ~70% of daily income. A disruption during peak hours is catastrophic.
+Peak hours generate roughly 70% of daily income. A disruption during peak hours wipes out most of what he would have earned that day.
 
 ### Why Q-Commerce Is Uniquely Vulnerable
 
-Unlike Zomato/Swiggy riders, Arjun **cannot relocate** to find orders. He is tethered to his dark store zone. If that zone floods, if his dark store loses power, if a cyclone alert grounds platform operations — Arjun earns nothing. There is no workaround.
+Unlike Zomato/Swiggy riders, Arjun cannot relocate to find orders. He is assigned to his dark store zone. If that zone floods, if the dark store loses power, if a cyclone alert grounds platform operations, Arjun earns nothing. There is no workaround available to him.
 
 ---
 
-## 3. Solution Overview — GigShield
+## 3. Solution Overview
 
-**GigShield** is an AI-powered parametric income insurance platform for Q-Commerce delivery partners. It provides automated weekly coverage with zero-touch claims — no forms, no manual verification, no waiting.
+**GigShield** is an AI-powered parametric income insurance platform for Q-Commerce delivery partners. It provides automated weekly coverage with zero-touch claims, no forms, no manual verification, no waiting.
 
 ### Core Principle
 
-> When an external disruption event is verified by objective data, GigShield automatically initiates a payout to the worker's UPI within 15 minutes. Arjun never files a claim. The system does it for him.
+When an external disruption event is verified by objective data, GigShield automatically initiates a payout to the worker's UPI within 15 minutes. Arjun never files a claim. The system does it for him.
 
 ### 5-Step Flow
 
 ```
-[1. Onboard] → [2. Buy Weekly Policy] → [3. System Monitors 24/7] → [4. Auto Claim on Trigger] → [5. UPI Payout in 15 min]
+[1. Onboard] -> [2. Buy Weekly Policy] -> [3. System Monitors 24/7] -> [4. Auto Claim on Trigger] -> [5. UPI Payout in 15 min]
 ```
 
-1. **Onboard**: Arjun signs up in ~3 minutes. Links Zepto/Blinkit worker ID. Selects home zone. KYC via Aadhaar OTP.
-2. **Buy weekly policy**: Every Monday, the AI model calculates his personalised weekly premium (₹49–99). He pays via UPI. Coverage starts immediately.
+1. **Onboard**: Arjun signs up in roughly 3 minutes. Links his Zepto/Blinkit worker ID. Selects home zone. KYC via Aadhaar OTP.
+2. **Buy weekly policy**: Every Monday, the AI model calculates his personalised weekly premium (Rs.49-99). He pays via UPI and coverage starts immediately.
 3. **Monitoring**: GigShield's trigger engine polls weather, AQI, alert, and news APIs every 15 minutes across all active zones.
-4. **Auto claim**: When a trigger threshold is breached and cross-validated, a claim is automatically created. Arjun receives an SMS.
+4. **Auto claim**: When a trigger threshold is breached and cross-validated, a claim is automatically created and Arjun receives an SMS.
 5. **Instant payout**: After fraud validation passes, UPI transfer is initiated within 15 minutes.
 
 ### Coverage Scope
 
-| Covered ✅ | Not Covered ❌ |
+| Covered | Not Covered |
 |---|---|
 | Income lost due to extreme rainfall / flooding | Vehicle repairs |
 | Income lost due to cyclone / storm alerts | Health or accident expenses |
-| Income lost due to extreme heat (heat index > 42°C) | Life insurance |
+| Income lost due to extreme heat (heat index > 42 degrees C) | Life insurance |
 | Income lost due to severe air quality (AQI > 300) | Any non-income loss |
 | Income lost due to verified civic shutdowns (bandh/curfew) | Voluntary absence |
 
 ---
 
-## 4. Scenarios & Workflow
+## 4. Scenarios and Workflow
 
-### Scenario 1 — Northeast Monsoon Flood (October, Velachery)
+### Scenario 1: Northeast Monsoon Flood (October, Velachery)
 
 **Event**: IMD issues red alert. Rainfall exceeds 70mm in 3 hours. Velachery roads submerged.
 
-**Without GigShield**: Arjun cannot reach his dark store. Earns ₹0 for the day. Loses ₹800 — his entire day's income.
+**Without GigShield**: Arjun cannot reach his dark store. Earns Rs.0 for the day, losing Rs.800 in income he was counting on.
 
 **With GigShield**:
-- 08:45am — Trigger engine detects rainfall > 65mm threshold via IMD API
-- 08:47am — Cross-validates: order volume drop > 60% on Zepto/Blinkit mock API for Velachery zone
-- 08:48am — Trigger confirmed. Fraud engine checks Arjun's GPS is in registered zone
-- 08:50am — Claim auto-created. ₹400 payout initiated to Arjun's UPI
-- 09:03am — Arjun receives ₹400 and SMS: *"GigShield payout credited for rainfall disruption in your zone"*
+- 08:45am: Trigger engine detects rainfall > 65mm threshold via IMD API
+- 08:47am: Cross-validates order volume drop > 60% on Zepto/Blinkit mock API for Velachery zone
+- 08:48am: Trigger confirmed. Fraud engine checks Arjun's GPS is within his registered zone
+- 08:50am: Claim auto-created. Rs.400 payout initiated to Arjun's UPI
+- 09:03am: Arjun receives Rs.400 and SMS: "GigShield payout credited for rainfall disruption in your zone"
 
-### Scenario 2 — Cyclone Alert (December, Bay of Bengal)
+### Scenario 2: Cyclone Alert (December, Bay of Bengal)
 
 **Event**: IMD issues orange cyclone warning for Tamil Nadu coast. Zepto suspends operations in Chennai.
 
-**With GigShield**: IMD orange alert detected via NDMA RSS feed → platform suspension cross-validated → ₹600/day payout automatically initiated per affected worker.
+**With GigShield**: IMD orange alert detected via NDMA RSS feed, platform suspension cross-validated, Rs.600/day payout automatically initiated per affected worker. No action required from Arjun.
 
-### Scenario 3 — Extreme Heat (May, Sholinganallur)
+### Scenario 3: Extreme Heat (May, Sholinganallur)
 
-**Event**: Heat index crosses 43°C for 5 consecutive hours.
+**Event**: Heat index crosses 43 degrees C for 5 consecutive hours.
 
-**With GigShield**: OpenWeatherMap heat index API triggers at sustained > 42°C → ₹300 partial payout → workers also receive proactive SMS warning the evening before.
+**With GigShield**: OpenWeatherMap heat index API triggers at sustained > 42 degrees C, Rs.300 partial payout initiated, workers also receive a proactive SMS warning the evening before a predicted heat disruption day.
 
-### Scenario 4 — Political Bandh
+### Scenario 4: Political Bandh
 
 **Event**: Unplanned hartal called. Roads blocked. Zero platform orders across zone.
 
-**With GigShield**: News API detects verified bandh keyword cluster for Chennai → order volume drops > 80% → two-source validation confirms shutdown → ₹500 payout automatically initiated.
+**With GigShield**: News API detects verified bandh keyword cluster for Chennai, order volume drops > 80%, two-source validation confirms the shutdown, Rs.500 payout automatically initiated.
 
 ### Application Workflow
 
 ```
 WORKER SIDE                            ADMIN / INSURER SIDE
-────────────────────────────────────   ────────────────────────────────
-Register → Link Platform ID            Monitor loss ratios by zone
-        ↓                              View active policies
+------------------------------------   --------------------------------
+Register -> Link Platform ID           Monitor loss ratios by zone
+        |                              View active policies
 View AI-generated weekly premium       Predictive disruption alerts
-        ↓                              Fraud flagging dashboard
-Pay ₹49–99 via UPI                     Claims audit trail
-        ↓
+        |                              Fraud flagging dashboard
+Pay Rs.49-99 via UPI                   Claims audit trail
+        |
 Receive active policy confirmation
-        ↓
+        |
 Real-time disruption alerts (SMS)
-        ↓
-Auto payout on trigger — no action needed
-        ↓
+        |
+Auto payout on trigger (no action needed)
+        |
 Weekly earnings protection summary
 ```
 
@@ -152,52 +153,52 @@ Weekly earnings protection summary
 
 ### Why Weekly?
 
-Q-Commerce workers earn and spend on a weekly cycle. A ₹49–99 weekly charge is equivalent to skipping one delivery fee — psychologically accessible and aligned with their earnings rhythm.
+Q-Commerce workers earn and spend on a weekly cycle. A Rs.49-99 weekly charge is roughly equivalent to skipping one delivery fee, making it psychologically accessible and aligned with how workers already think about money.
 
 ### Premium Tiers
 
 | Tier | Weekly Premium | Max Coverage | Best For |
 |---|---|---|---|
-| Basic | ₹49 | ₹1,500/week | Low-risk zone, dry season |
-| Plus | ₹74 | ₹2,200/week | Medium-risk zone / monsoon shoulder months |
-| Max | ₹99 | ₹3,000/week | High-risk zone (Velachery) / peak monsoon |
+| Basic | Rs.49 | Rs.1,500/week | Low-risk zone, dry season |
+| Plus | Rs.74 | Rs.2,200/week | Medium-risk zone / monsoon shoulder months |
+| Max | Rs.99 | Rs.3,000/week | High-risk zone (Velachery) / peak monsoon |
 
 ### AI Premium Calculation
 
-Every **Monday at 6:00am**, the AI risk model calculates each worker's premium for the upcoming 7-day window.
+Every Monday at 6:00am, the AI risk model calculates each worker's premium for the upcoming 7-day coverage window.
 
 **Input features:**
 
 | Feature | Example |
 |---|---|
 | Worker's home zone | Velachery (flood-prone = high risk) |
-| Current month / season | October = 2× risk multiplier |
-| 7-day weather forecast | 60% rain probability → elevated premium |
-| Historical claim frequency | First-time user → neutral baseline |
-| Platform activity baseline | Avg 20 deliveries/day → payout calibration |
+| Current month / season | October = 2x risk multiplier |
+| 7-day weather forecast | 60% rain probability leads to elevated premium |
+| Historical claim frequency | First-time user gets neutral baseline |
+| Platform activity baseline | Avg 20 deliveries/day used for payout calibration |
 | Selected coverage tier | Basic / Plus / Max |
 
-**Model**: Gradient Boosting Regressor (scikit-learn), trained on IMD Chennai historical weather records (2018–2024), historical disruption events per zone, and synthetic worker profiles.
+**Model**: Gradient Boosting Regressor (scikit-learn), trained on IMD Chennai historical weather records (2018-2024), historical disruption events per zone, and synthetic worker profiles.
 
-**Output**: Personalised weekly premium capped between ₹49–₹99.
+**Output**: Personalised weekly premium capped between Rs.49 and Rs.99.
 
 ### Premium-to-Payout Ratio
 
-On a worst-case week (cyclone + bandh + extreme rain = 3 triggered days), a Max-tier worker paying ₹99 can receive up to ₹1,500 in payouts — a **15× return** on their premium.
+On a worst-case week (cyclone + bandh + extreme rain = 3 triggered days), a Max-tier worker paying Rs.99 can receive up to Rs.1,500 in payouts, a 15x return on their premium.
 
 ---
 
 ## 6. Parametric Triggers
 
-All triggers are **objective, verifiable, and API-driven**. Two independent data sources must confirm every trigger before a claim is initiated.
+All triggers are objective, verifiable, and API-driven. Two independent data sources must confirm every trigger before a claim is initiated.
 
 | # | Trigger | Threshold | Primary API | Secondary Validation | Payout |
 |---|---|---|---|---|---|
-| T1 | Extreme rainfall | > 65mm in 3 hours | IMD / OpenWeatherMap | Order volume drop > 60% | ₹400/day |
-| T2 | Extreme heat | Heat index > 42°C for 4+ hours | OpenWeatherMap | Platform advisory (mock) | ₹300/day |
-| T3 | Cyclone / storm alert | IMD orange or red alert | NDMA RSS feed | Platform suspension (mock) | ₹600/day |
-| T4 | Severe air quality | AQI > 300 (Very Poor) | CPCB / AQI India API | Duration > 3 hours | ₹250/day |
-| T5 | Civic shutdown | Verified bandh / curfew | News API (keyword cluster) | Order volume drop > 80% | ₹500/day |
+| T1 | Extreme rainfall | > 65mm in 3 hours | IMD / OpenWeatherMap | Order volume drop > 60% | Rs.400/day |
+| T2 | Extreme heat | Heat index > 42C for 4+ hours | OpenWeatherMap | Platform advisory (mock) | Rs.300/day |
+| T3 | Cyclone / storm alert | IMD orange or red alert | NDMA RSS feed | Platform suspension (mock) | Rs.600/day |
+| T4 | Severe air quality | AQI > 300 (Very Poor) | CPCB / AQI India API | Duration > 3 hours | Rs.250/day |
+| T5 | Civic shutdown | Verified bandh / curfew | News API (keyword cluster) | Order volume drop > 80% | Rs.500/day |
 
 ### Trigger Engine Logic (Pseudocode)
 
@@ -216,7 +217,7 @@ def evaluate_triggers(zone, worker_list):
 
 ### Zone-Based Triggering
 
-Triggers are evaluated **per zone**, not city-wide. A flood in Velachery does not trigger payouts for workers in Anna Nagar. This zone-level precision is the core differentiator from generic insurance products.
+Triggers are evaluated per zone, not city-wide. A flood in Velachery does not trigger payouts for workers in Anna Nagar. This zone-level precision is what separates GigShield from generic insurance products.
 
 ---
 
@@ -226,26 +227,23 @@ Triggers are evaluated **per zone**, not city-wide. A flood in Velachery does no
 
 - **Model**: Gradient Boosting Regressor
 - **Framework**: scikit-learn
-- **Training data**: Synthetic dataset built on IMD Chennai weather records (2018–2024), disruption frequency per zone, and modelled worker activity patterns
-- **Runs**: Every Monday 6:00am for all active policyholders
-- **Output**: Personalised weekly premium between ₹49–₹99
+- **Training data**: Synthetic dataset built on IMD Chennai weather records (2018-2024), disruption frequency per zone, and modelled worker activity patterns
+- **Runs**: Every Monday at 6:00am for all active policyholders
+- **Output**: Personalised weekly premium between Rs.49 and Rs.99
 
 ### 7.2 Fraud Detection (Real-Time, Per Claim)
 
 - **Model**: Isolation Forest (unsupervised anomaly detection)
 - **Framework**: scikit-learn
 - **Runs**: Synchronously on every auto-generated claim before payout release
-- **Layered approach**: Rule-based pre-filter → ML anomaly score → risk decision
-- *(Full detail in Section 8)*
+- **Layered approach**: Rule-based pre-filter, then ML anomaly score, then risk decision
+- Full detail in Section 8
 
 ### 7.3 Predictive Disruption Alerts (Proactive)
 
 - **Approach**: Time-series analysis on IMD 7-day forecast data per zone
 - **Output**: Next-day disruption probability per zone
-- **Use cases**:
-  - Workers receive proactive SMS the evening before a likely disruption day
-  - Admin dashboard shows predicted claim volume for the next 7 days
-  - Insurer can adjust reserve levels dynamically
+- **Use cases**: Workers receive a proactive SMS the evening before a likely disruption day. The admin dashboard shows predicted claim volume for the next 7 days. The insurer can adjust reserve levels dynamically based on forecast risk.
 
 ---
 
@@ -260,107 +258,178 @@ Parametric insurance is vulnerable to organised fraud because payouts are automa
 - **Context mismatch**: Claiming disruption during normal conditions
 - **Static spoofing**: Faking zero movement to simulate a work stoppage
 
-### 8.2 Dataset — Semi-Synthetic Simulation
+### 8.2 Dataset: Semi-Synthetic Simulation
 
 Since real-world labelled fraud datasets are unavailable, we construct a semi-synthetic dataset modelling realistic Q-Commerce delivery behaviour and adversarial patterns.
 
-**Each data point = a 5-minute time-windowed summary:**
+Each data point represents a 5-minute time-windowed summary:
 
 | Feature | Description |
 |---|---|
-| `avg_speed` | Average speed within window |
-| `max_speed` | Maximum observed speed |
-| `distance` | Total distance travelled |
-| `stationary_time` | Duration with near-zero movement |
-| `cluster_density` | Number of nearby users in same zone |
-| `weather_mismatch` | Claimed vs actual weather condition |
-| `region_id` | Encoded geographic zone |
-| `device_risk` | Device integrity indicator ∈ [0,1] |
+| avg_speed | Average speed within window |
+| max_speed | Maximum observed speed |
+| distance | Total distance travelled |
+| stationary_time | Duration with near-zero movement |
+| cluster_density | Number of nearby users in same zone |
+| weather_mismatch | Claimed vs actual weather condition |
+| region_id | Encoded geographic zone |
+| device_risk | Device integrity indicator between 0 and 1 |
 
 **Dataset composition:**
-- Total samples: ~5,000–10,000
-- Normal behaviour: 85–90%
-- Fraud patterns: 10–15%
-- Simulated users: ~80–120
-- Time windows per user: ~80–120
+- Total samples: approximately 5,000-10,000
+- Normal behaviour: 85-90%
+- Fraud patterns: 10-15%
+- Simulated users: approximately 80-120
+- Time windows per user: approximately 80-120
 
 ### 8.3 Normal Behaviour Simulation
 
-- Speed: base 20–45 km/h with small random noise for realistic variation
-- Movement continuity: lat/long updated in small steps (normal distribution, small variance) — no abrupt jumps
-- Context-aware: reduced speed during simulated rain; increased cluster density in high-traffic zones
-- Temporal: peak hours → higher cluster density; off-hours → lower activity
+Normal delivery behaviour is generated using constrained stochastic processes:
+
+- Speed is generated with a base range of 20-45 km/h with small random noise to simulate natural variation
+- Movement continuity is maintained by updating location in small steps. Latitude and longitude changes are sampled from a normal distribution with very small variance, producing smooth movement rather than abrupt jumps
+- Context-aware adjustments include reduced speed during simulated rain and increased cluster density in high-traffic zones
+- Temporal variation includes higher cluster density during peak hours and lower activity during off-hours
 
 ### 8.4 Fraud Pattern Injection
 
 | Fraud Type | Behavioural Signature |
 |---|---|
-| **Teleportation** | Large spatial displacement in short time; implied speed exceeds physical constraints |
-| **Static spoofing** | Near-zero movement + high stationary time despite active claim |
-| **Coordinated fraud** | Multiple users at identical/near-identical locations; high cluster density in short interval |
-| **Context mismatch** | Claim indicates disruption; actual API conditions show normal environment |
+| Teleportation | Large spatial displacement in short time, with implied speed exceeding physical constraints |
+| Static spoofing | Near-zero movement and high stationary time despite an active claim |
+| Coordinated fraud | Multiple users at identical or near-identical locations with high cluster density in short intervals |
+| Context mismatch | Claim indicates disruption while actual API conditions show a normal environment |
 
 ### 8.5 Feature Engineering
 
 **Movement features:**
-- `avg_speed` = total_distance / total_time
-- `max_speed` = max(segment_speeds)
-- `distance` = sum of segment distances
-- `stationary_time` = duration where speed < threshold
+- avg_speed = total_distance / total_time
+- max_speed = max(segment_speeds)
+- distance = sum of segment distances
+- stationary_time = duration where speed is below threshold
 
 **Context features:**
-- `weather_mismatch` = 1 if claimed condition ≠ actual API condition
-- `region_id` = categorical zone encoding
+- weather_mismatch = 1 if claimed condition does not match actual API condition
+- region_id = categorical zone encoding
 
 **Coordination feature:**
-- `cluster_density` = count of users within radius r at same time window
+- cluster_density = count of users within radius r at the same time window
 
 **Device signal:**
-- `device_risk` ∈ [0,1] — device integrity score
+- device_risk is a value between 0 and 1 representing the device integrity score
 
-### 8.6 Model Design — Isolation Forest
+### 8.6 Model Design: Isolation Forest
 
 | Hyperparameter | Value |
 |---|---|
-| `n_estimators` | 100 |
-| `contamination` | 0.05 |
-| `max_samples` | auto |
-| `random_state` | fixed |
+| n_estimators | 100 |
+| contamination | 0.05 |
+| max_samples | auto |
+| random_state | fixed |
 
 **Training strategy:**
 - Trained primarily on normal behaviour data
-- Fraud samples held out for validation only
-- No labelled data required — unsupervised detection
+- Fraud samples held out for validation only, not used in training
+- No labelled data required, making this a true unsupervised detection approach
 
-**Output:** Continuous anomaly score + binary decision (normal / anomaly)
+**Output**: Continuous anomaly score plus binary decision (normal / anomaly)
 
 ### 8.7 Rule-Based Validation Layer
 
 Applied as a deterministic pre-filter before the ML model:
-- `max_speed` > 80 km/h → instant flag (impossible for city 2-wheeler)
-- Displacement > 5km in < 5 minutes → teleportation flag
-- `weather_mismatch` = 1 → context flag
-- `cluster_density` > 95th percentile → coordination flag
+- max_speed > 80 km/h flags instantly (not physically possible for a city 2-wheeler)
+- Displacement > 5km in under 5 minutes flags as teleportation
+- weather_mismatch = 1 flags as context mismatch
+- cluster_density above 95th percentile flags as potential coordination
 
 ### 8.8 Decision Engine
 
 | Risk Score | Action |
 |---|---|
-| Low | Approve — payout released |
-| Medium | Flag — queued for human review |
-| High | Reject — claim denied, worker notified |
-
-### 8.9 Anti-Spoofing Key Insight
-
-> Spoofed GPS can mimic *location* but cannot replicate *realistic motion patterns*, *natural speed distributions*, or *independent behavioural signatures*. GigShield detects the inconsistency between where a device claims to be and how it is actually behaving.
+| Low | Approve, payout released |
+| Medium | Flag, queued for human review |
+| High | Reject, claim denied and worker notified |
 
 ---
 
-## 9. Tech Stack & Development Plan
+## 9. Adversarial Defense and Anti-Spoofing Strategy
+
+This section addresses the coordinated GPS spoofing threat scenario: a syndicate of delivery workers using spoofing applications to fake location presence in a disruption zone and trigger mass false payouts.
+
+### 9.1 The Differentiation Problem: Stranded Worker vs. Bad Actor
+
+Simple GPS verification cannot tell apart a genuinely stranded Arjun from someone sitting at home running a spoofing app. GigShield solves this through behavioural consistency scoring across multiple independent signals, not location data alone.
+
+A real delivery worker stranded in a flood zone behaves in a specific, measurable way:
+
+- Their device shows movement patterns consistent with someone waiting near or attempting to navigate their usual zone
+- Speed readings fluctuate naturally, including small movements, phone handling, and repositioning
+- Their order acceptance rate on the platform drops to zero because no orders are being dispatched to that zone
+- Battery drain and network signal patterns are consistent with outdoor device usage in adverse conditions
+
+A spoofing actor sitting at home looks different across these signals:
+
+- GPS coordinates place them in the zone, but motion data shows stationary or unnaturally smooth patterns
+- Speed and acceleration readings lack the micro-variation of real outdoor movement
+- Device sensor data (accelerometer, gyroscope) does not match claimed outdoor activity
+- Network handshake patterns may reflect a home Wi-Fi connection despite a claimed field location
+
+**How GigShield differentiates:**
+
+Every claim is cross-referenced across four independent signal layers before approval:
+
+1. **GPS coordinates**: necessary but not sufficient on their own
+2. **Behavioural motion signals**: avg_speed, max_speed, and stationary_time patterns across the 5-minute window
+3. **Platform-side signals**: order dispatch volume in the worker's zone from the mock platform API, confirming whether the disruption actually suppressed platform activity
+4. **Environmental cross-match**: the claimed disruption event must be independently confirmed by at least two external APIs (e.g., IMD rainfall data plus Blinkit order volume drop in the same zone)
+
+A genuine stranded worker passes all four layers naturally. A spoofed claim typically fails on layers 2 and 3.
+
+### 9.2 Beyond GPS: Detecting a Coordinated Ring
+
+When a syndicate coordinates via Telegram, the attack leaves a statistical fingerprint that individual fraud cannot replicate:
+
+**Cluster density anomaly**: In normal disruption events, workers are distributed across a zone proportionally to their registered home locations. Coordinated fraud produces an unnaturally high density of claims originating from the same micro-location or showing near-identical GPS coordinates with only minor offsets.
+
+**Synchronisation timing**: Genuine claims arrive over a distributed time window as different workers encounter the disruption at different moments. A coordinated ring triggers claims within a suspiciously narrow window, often within seconds of each other across many accounts.
+
+**Claim-to-active-user ratio**: On a genuine disruption day, the ratio of claims to registered active workers in a zone follows historical patterns for that zone. A sudden spike where 90%+ of zone workers file simultaneously is a statistical outlier that gets flagged immediately.
+
+**Velocity consistency**: Real workers in a flood zone show irregular, low-speed movement. Spoofed actors tend to show perfectly static GPS or movement that lacks the micro-jitter of genuine handheld device use outdoors.
+
+**Device diversity check**: A coordinated ring often uses similar spoofing software, producing recognisable device_risk signatures and similar accelerometer fingerprints across many devices at the same time.
+
+GigShield's Isolation Forest model is trained on these coordination patterns and flags clusters where multiple workers share anomalous similarity across these features simultaneously.
+
+### 9.3 UX Balance: Handling Flagged Claims Without Penalising Honest Workers
+
+A real worker in a genuine flood zone may have connectivity issues, an older device, or movement patterns that superficially resemble spoofing. Wrongly rejecting his claim would be a serious failure of the product.
+
+**How GigShield handles medium-risk flags:**
+
+The payout is not immediately rejected. It moves to a temporary hold state, not a denial. The worker receives an SMS: "Your claim is being verified. You will receive your payout or an update within 2 hours."
+
+A lightweight secondary verification then runs automatically:
+- The system checks whether other workers in the same sub-zone also filed claims around the same time. If they are verified, this corroborates that the disruption was real
+- The system checks whether platform order volume in that zone dropped significantly, which confirms the disruption independently of any individual GPS data
+- If the worker has a clean claim history with no prior fraud flags, the system applies a trust adjustment that reduces the anomaly weight automatically
+
+If the medium-risk claim cannot be auto-resolved within 2 hours, a human reviewer gets a simple dashboard view showing the worker's motion trace, the zone disruption data, and the anomaly score breakdown. Most genuine cases are resolved within the 2-hour window without the worker needing to do anything at all.
+
+**What we do not do:**
+- We do not ask workers to upload photos or videos as proof, which burdens legitimate claimants and is easily gamed
+- We do not reject based on a single anomalous signal
+- We do not penalise a worker's future premiums based on a flagged-but-resolved claim
+
+**False positive target**: Our fraud model targets a maximum 2% false positive rate on genuine claims. A flagged honest worker gets their payout within 2 hours if zone-level corroborating data confirms the disruption. Only claims where both individual signals and zone signals are simultaneously anomalous result in outright rejection.
+
+---
+
+## 10. Tech Stack and Development Plan
 
 ### Platform Choice: Web (Mobile-First PWA)
 
-A Progressive Web App is accessible without app store installation. Workers in Chennai predominantly use mid-range Android devices. A mobile-first React PWA with offline capability is the optimal delivery mechanism.
+A Progressive Web App is accessible without requiring app store installation, which matters for workers with limited storage on budget Android devices. A mobile-first React PWA with offline capability is the right delivery mechanism for this user group.
 
 ### Tech Stack
 
