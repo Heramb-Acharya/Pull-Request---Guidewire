@@ -262,6 +262,3 @@ We do not ask for photo or video proof. We do not reject on a single anomalous s
 
 ---
 
-
-- Pitch deck: persona, market sizing, K-factor system, ML architecture, unit economics
-
