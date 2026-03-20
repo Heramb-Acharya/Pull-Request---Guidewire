@@ -1,485 +1,263 @@
-# Rakshak: AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
+# Rakshak — Parametric Income Insurance for Q-Commerce Riders
 
-> **Guidewire DEVTrails 2026** | Phase 1 Submission
-
----
-
-## Table of Contents
-
-1. [Problem Statement](#1-problem-statement)
-2. [Our Persona](#2-our-persona)
-3. [Solution Overview](#3-solution-overview)
-4. [Persona-Based Scenarios and Application Workflow](#4-scenarios-and-workflow)
-5. [Weekly Premium Model](#5-weekly-premium-model)
-6. [Parametric Triggers](#6-parametric-triggers)
-7. [AI/ML Integration Plan](#7-aiml-integration-plan)
-8. [Fraud Detection System](#8-fraud-detection-system)
-9. [Adversarial Defense and Anti-Spoofing Strategy](#9-adversarial-defense-and-anti-spoofing-strategy)
-10. [Tech Stack and Development Plan](#10-tech-stack-and-development-plan)
-11. [Deliverables Roadmap](#11-deliverables-roadmap)
+> Guidewire DEVTrails 2026 | Phase 1 Submission
 
 ---
 
-## 1. Problem Statement
+## 1. The Problem
 
-India's Q-Commerce delivery partners — riders working for Zepto and Blinkit — are among the most economically vulnerable workers in the gig economy. Unlike food delivery riders who can roam across a city, Q-Commerce workers are locked to a hyperlocal zone (2–3 km radius) around a single dark store. This creates a unique and severe income risk:
+India's Zepto and Blinkit riders are the most income-exposed workers in the gig economy — and nobody talks about it. A Zomato rider can switch zones when it rains. A Q-Commerce rider can't. He's assigned to one dark store, one 2–3 km radius. When that zone floods, overheats, or shuts down — he earns zero. No fallback, no claim process, no safety net.
 
-- A single flood, cyclone alert, extreme heat event, or civic shutdown can eliminate 100% of a day's earnings instantly
-- Workers earn Rs.700–900 on good days and Rs.0 on bad days, with no way to recover lost hours
-- Seasonal disruptions — monsoons, cyclones, extreme heat waves, and civic shutdowns — routinely eliminate entire workdays for riders locked to a single dark store zone, with no income protection whatsoever
-- Currently, no insurance product exists that addresses this specific, parametric, income-loss risk for Q-Commerce workers
+This isn't a rare edge case. Chennai's northeast monsoon runs October through December. April through June brings heat indexes above 42°C. Unplanned bandhs happen without warning. These aren't freak events — they're structural income risk that hits the same riders, in the same zones, every year.
 
-We are insuring lost income only — not vehicles, not health, not accidents. This is a pure parametric income safety net.
+No insurance product currently addresses income loss for Q-Commerce riders specifically. We're building it.
+
+**What we cover:** lost income due to external disruptions — extreme weather, severe air quality, civic shutdowns. Nothing else. No vehicle repair, no health, no accidents.
 
 ---
 
 ## 2. Our Persona
 
-**Arjun, 26, Q-Commerce Delivery Partner, Chennai**
+**Arjun, 26 — Zepto rider, Velachery/Sholinganallur, Chennai**
 
-| Attribute | Detail |
+| | |
 |---|---|
-| Platforms | Zepto (primary) + Blinkit (secondary) |
-| Home zone | Velachery / Sholinganallur |
+| Platforms | Zepto (primary), Blinkit (secondary) |
+| Zone | Velachery / Sholinganallur dark store corridor |
 | Vehicle | Electric 2-wheeler |
-| Experience | 2 years on platform |
-| Daily earnings (good day) | Rs.700–900 (18–25 deliveries x Rs.30–45) |
-| Daily earnings (disrupted day) | Rs.0–150 |
+| Good day earnings | Rs.700–900 (18–25 deliveries × Rs.30–45) |
+| Disrupted day earnings | Rs.0–150 |
 | Weekly earnings | Rs.4,500–6,000 |
-| Savings / safety net | None |
-| Primary risk seasons | Oct–Dec (monsoon/cyclone), Apr–Jun (extreme heat) |
-
-### Arjun's Daily Schedule
+| Safety net | None |
 
 ```
-08:00 ---- [09:00-11:00 PEAK] ---- [12:00-17:00 LULL] ---- [18:00-21:00 PEAK] ---- 23:00
+Daily schedule:
+08:00 --[PEAK 9-11am]--[LULL 12-5pm]--[PEAK 6-9pm]-- 23:00
+                ↑ 70% of daily income lives here
 ```
 
-Peak hours generate roughly 70% of daily income. A disruption during peak hours wipes out most of what he would have earned that day.
-
-### Why Q-Commerce Is Uniquely Vulnerable
-
-Unlike Zomato/Swiggy riders, Arjun cannot relocate to find orders. He is assigned to his dark store zone. If that zone floods, if the dark store loses power, if a cyclone alert grounds platform operations, or if a bandh locks down the city — Arjun earns nothing. There is no workaround available to him.
+Arjun is our demo persona. The platform is built for any Q-Commerce corridor in India — swapping cities means updating zone boundaries and API coordinates, nothing more.
 
 ---
 
-## 3. Solution Overview
+## 3. Solution
 
-**Rakshak** is an AI-powered parametric income insurance platform for Q-Commerce delivery partners. It provides automated weekly coverage with zero-touch claims — no forms, no manual verification, no waiting.
-
-### Core Principle
-
-When an external disruption event is verified by objective data, Rakshak automatically initiates a payout to the worker's UPI within 15 minutes. Arjun never files a claim. The system does it for him.
-
-### 5-Step Flow
+**Rakshak** is a zero-touch parametric income insurance platform. When a verified disruption hits Arjun's zone, he gets paid automatically — no claim form, no photo upload, no waiting.
 
 ```
-[1. Onboard] -> [2. Buy Weekly Policy] -> [3. System Monitors 24/7] -> [4. Auto Claim on Trigger] -> [5. UPI Payout in 15 min]
+Onboard (3 min)
+    → Buy weekly policy (every Monday, Rs.49–99)
+        → System monitors APIs 24/7
+            → Trigger fires + fraud check passes
+                → UPI payout in under 15 minutes
 ```
 
-1. **Onboard**: Arjun signs up in roughly 3 minutes. Links his Zepto/Blinkit worker ID. Selects home zone. KYC via Aadhaar OTP.
-2. **Buy weekly policy**: Every Monday, the AI model calculates his personalised weekly premium (Rs.49–99). He pays via UPI and coverage starts immediately.
-3. **Monitoring**: Rakshak's trigger engine polls weather, AQI, alert, and news APIs every 15 minutes across all active zones.
-4. **Auto claim**: When a trigger threshold is breached and cross-validated, a claim is automatically created and Arjun receives an SMS.
-5. **Instant payout**: After fraud validation passes, UPI transfer is initiated within 15 minutes.
-
-### Coverage Scope
-
-| Covered | Not Covered |
-|---|---|
-| Income lost due to extreme rainfall / flooding | Vehicle repairs |
-| Income lost due to cyclone / storm alerts | Health or accident expenses |
-| Income lost due to extreme heat (heat index > 42°C) | Life insurance |
-| Income lost due to severe air quality (AQI > 300) | Any non-income loss |
-| Income lost due to verified civic shutdowns (bandh/curfew) | Voluntary absence |
-
-### Geographic Scope
-
-Rakshak is built for any Q-Commerce dark store corridor in India. The trigger engine, premium model, and fraud detection pipeline are all parameterised by zone — Arjun's Velachery corridor in Chennai is our development and demo context, but the platform replicates to any city where Zepto or Blinkit operates. Swapping cities requires updating zone boundaries and API coordinates, nothing more.
+Arjun never does anything after buying the policy. The system handles everything.
 
 ---
 
-## 4. Scenarios and Workflow
+## 4. Parametric Triggers
 
-### Scenario 1: Northeast Monsoon Flood (October, Velachery)
+Every trigger requires two independent sources to confirm before a payout fires. One API going wrong never causes a false payout.
 
-**Event**: IMD issues red alert. Rainfall exceeds 70mm in 3 hours. Velachery roads submerged.
+**Phase 2 implementation (P1 triggers):**
 
-**Without Rakshak**: Arjun cannot reach his dark store. Earns Rs.0 for the day, losing Rs.800 in income he was counting on.
+| Trigger | Threshold | Primary Source | Secondary Validation | Base Payout |
+|---|---|---|---|---|
+| Extreme rainfall | > 65mm / 3 hrs | IMD / OpenWeatherMap | Order volume drop > 60% | Rs.400/day |
+| Cyclone / storm alert | IMD orange or red | NDMA RSS feed | Platform suspension (mock) | Rs.600/day |
+| Extreme heat | Heat index > 42°C / 4hrs | OpenWeatherMap | Platform advisory (mock) | Rs.300/day |
+| Severe AQI | AQI > 300 for 3+ hrs | CPCB / AQI India API | Duration cross-check | Rs.250/day |
+| Bandh / civic shutdown | Verified keyword cluster | NewsAPI | Order volume drop > 80% | Rs.500/day |
 
-**With Rakshak**:
-- 08:45am: Trigger engine detects rainfall > 65mm threshold via IMD API
-- 08:47am: Cross-validates order volume drop > 60% on Zepto/Blinkit mock API for Velachery zone
-- 08:48am: Trigger confirmed. Fraud engine checks Arjun's GPS is within his registered zone
-- 08:50am: Claim auto-created. Rs.400 payout initiated to Arjun's UPI
-- 09:03am: Arjun receives Rs.400 and SMS: "Rakshak payout credited for rainfall disruption in your zone"
+**Roadmap triggers (P2/P3):** dense fog, platform app outage, dark store outage, waterlogging without red alert, Section 144 curfew, election day restrictions, major road closures.
 
-### Scenario 2: Cyclone Alert (December, Bay of Bengal)
-
-**Event**: IMD issues orange cyclone warning for Tamil Nadu coast. Zepto suspends operations in Chennai.
-
-**With Rakshak**: IMD orange alert detected via NDMA RSS feed, platform suspension cross-validated, Rs.600/day payout automatically initiated per affected worker. No action required from Arjun.
-
-### Scenario 3: Extreme Heat (May, Sholinganallur)
-
-**Event**: Heat index crosses 43°C for 5 consecutive hours.
-
-**With Rakshak**: OpenWeatherMap heat index API triggers at sustained > 42°C, Rs.300 partial payout initiated, workers also receive a proactive SMS warning the evening before a predicted heat disruption day.
-
-### Scenario 4: Political Bandh
-
-**Event**: Unplanned hartal called. Roads blocked. Zero platform orders across zone.
-
-**With Rakshak**: News API detects verified bandh keyword cluster for the city, order volume drops > 80%, two-source validation confirms the shutdown, Rs.500 payout automatically initiated.
-
-### Application Workflow
-
-```
-WORKER SIDE                            ADMIN / INSURER SIDE
-------------------------------------   --------------------------------
-Register -> Link Platform ID           Monitor loss ratios by zone
-        |                              View active policies
-View AI-generated weekly premium       Predictive disruption alerts
-        |                              Fraud flagging dashboard
-Pay Rs.49-99 via UPI                   Claims audit trail
-        |
-Receive active policy confirmation
-        |
-Real-time disruption alerts (SMS)
-        |
-Auto payout on trigger (no action needed)
-        |
-Weekly earnings protection summary
-```
+Triggers are evaluated per zone every 15 minutes — not city-wide. A flood in Velachery does not pay out workers in Anna Nagar.
 
 ---
 
 ## 5. Weekly Premium Model
 
-### Why Weekly?
+### Why weekly?
 
-Q-Commerce workers earn and spend on a weekly cycle. A Rs.49–99 weekly charge is roughly equivalent to skipping one delivery fee, making it psychologically accessible and aligned with how workers already think about money.
+Gig workers earn and spend week to week. Rs.49–99 is the cost of skipping one delivery. It fits how Arjun already thinks about money.
 
-### Premium Tiers
+### Tiers
 
-| Tier | Weekly Premium | Max Coverage | Best For |
-|---|---|---|---|
-| Basic | Rs.49 | Rs.1,500/week | Low-risk zone, dry season |
-| Plus | Rs.74 | Rs.2,200/week | Medium-risk zone / monsoon shoulder months |
-| Max | Rs.99 | Rs.3,000/week | High-risk zone / peak disruption season |
+| Tier | Premium | Max Weekly Coverage |
+|---|---|---|
+| Basic | Rs.49 | Rs.1,500 |
+| Plus | Rs.74 | Rs.2,200 |
+| Max | Rs.99 | Rs.3,000 |
 
-### AI Premium Calculation
+### How the premium is calculated
 
-Every Monday at 6:00am, the AI risk model calculates each worker's premium for the upcoming 7-day coverage window.
+Every Monday at 6am, a **Gradient Boosting Regressor** calculates each rider's premium for the next 7 days using: home zone flood/heat risk, current season, 7-day weather forecast, historical claim frequency, and K_trust score (explained below). Output is capped between Rs.49–99.
 
-**Input features:**
+### The K-Factor Payout System
 
-| Feature | Example |
-|---|---|
-| Worker's home zone | Flood-prone zone = high risk multiplier |
-| Current month / season | Peak monsoon month = 2x risk multiplier |
-| 7-day weather forecast | 60% rain probability leads to elevated premium |
-| Historical claim frequency | First-time user gets neutral baseline |
-| Platform activity baseline | Avg 20 deliveries/day used for payout calibration |
-| Selected coverage tier | Basic / Plus / Max |
+Most parametric platforms pay full or nothing. That's the wrong design — it overpays on weak signals and underpays honest riders when verification is incomplete. Rakshak uses a three-part multiplier:
 
-**Model**: Gradient Boosting Regressor (scikit-learn), trained on IMD historical weather records, historical disruption events per zone, and synthetic worker profiles.
-
-**Output**: Personalised weekly premium capped between Rs.49 and Rs.99.
-
-### Premium-to-Payout Ratio
-
-On a worst-case week (cyclone + bandh + extreme rain = 3 triggered days), a Max-tier worker paying Rs.99 can receive up to Rs.1,500 in payouts — a 15x return on their premium.
-
-### 5.4 Why the Math Works: Unit Economics
-
-The 15x worst-case payout ratio sounds alarming on paper. It works because of three structural realities of parametric insurance at zone level.
-
-**Not everyone claims simultaneously.** Rakshak's triggers are zone-specific. A flood in one zone does not trigger another. Across a typical city, there are roughly 6–10 active dark-store zones. Historical IMD data shows that city-wide simultaneous red alerts — all zones affected at once — happen only a handful of times per year during peak disruption seasons. On a typical disruption day, 1–2 zones are affected. This means at most 20–25% of active policyholders claim on any given day.
-
-**The premium pool absorbs expected losses.** Assume 500 active workers, all on the Rs.74 Plus tier. Weekly pool = Rs.37,000. On a 1-zone flood day, roughly 60–80 workers claim (Rs.400 each) = Rs.28,000 in payouts. Pool holds. On a worst-case week with 3 disruption days across multiple zones, payouts could reach Rs.65,000–80,000 against a pool of Rs.37,000 — this is the catastrophic scenario we plan for explicitly.
-
-**Catastrophic event handling.** For a genuine citywide disruption (all zones affected simultaneously), we implement two safeguards. First, a per-zone weekly payout cap: maximum total payout per zone per week is capped at 2x that zone's weekly premium contribution, protecting the liquidity pool. Second, in a real deployment, Rakshak would carry reinsurance for events where simultaneous claims exceed 40% of the active pool — standard practice for parametric products. For the hackathon, we simulate this with a reserve buffer of 3x weekly pool size maintained in the payment system.
-
-The model is not designed to be profitable at 500 users. It reaches break-even at approximately 2,000 active workers per city, which is realistic given Zepto and Blinkit's combined rider count in any tier-1 Indian city exceeds 10,000–15,000.
-
----
-
-## 6. Parametric Triggers
-
-All triggers are objective, verifiable, and API-driven. Two independent data sources must confirm every trigger before a claim is initiated.
-
-| # | Trigger | Threshold | Primary API | Secondary Validation | Payout |
-|---|---|---|---|---|---|
-| T1 | Extreme rainfall | > 65mm in 3 hours | IMD / OpenWeatherMap | Order volume drop > 60% | Rs.400/day |
-| T2 | Extreme heat | Heat index > 42°C for 4+ hours | OpenWeatherMap | Platform advisory (mock) | Rs.300/day |
-| T3 | Cyclone / storm alert | IMD orange or red alert | NDMA RSS feed | Platform suspension (mock) | Rs.600/day |
-| T4 | Severe air quality | AQI > 300 (Very Poor) | CPCB / AQI India API | Duration > 3 hours | Rs.250/day |
-| T5 | Civic shutdown | Verified bandh / curfew | News API (keyword cluster) | Order volume drop > 80% | Rs.500/day |
-
-### Trigger Engine Logic (Pseudocode)
-
-```python
-# Runs every 15 minutes per active zone
-def evaluate_triggers(zone, worker_list):
-    for trigger in [T1, T2, T3, T4, T5]:
-        primary_signal = fetch_primary_api(trigger, zone)
-        if primary_signal.breaches_threshold():
-            secondary_signal = fetch_secondary_api(trigger, zone)
-            if secondary_signal.confirms():
-                for worker in worker_list:
-                    if fraud_engine.validate(worker, trigger):
-                        initiate_claim(worker, trigger.payout_amount)
+```
+Payout = Base Coverage × K_event × K_severity × K_trust
+                                         (hard cap: 0.95 of coverage)
 ```
 
-### Zone-Based Triggering
+**K_event — how well was the disruption verified?**
 
-Triggers are evaluated per zone, not city-wide. A flood in one zone does not trigger payouts for workers in a neighbouring zone. This zone-level precision is what separates Rakshak from generic insurance products and is also what keeps the loss ratio manageable — payouts are always proportional to the actual footprint of the disruption.
+| Value | Condition |
+|---|---|
+| 1.00 | Both primary API + secondary platform signal confirmed |
+| 0.75 | Primary confirmed, secondary unavailable |
+| 0.60 | Primary borderline, secondary partially confirms |
+| 0.50 | Single source only — minimum floor |
+
+K_event never goes below 0.50 unless fraud is confirmed. The system's verification gaps are never the rider's problem. If fraud is confirmed, K_event is forced to 0 and the claim is rejected regardless of everything else.
+
+**K_severity — how long did it last, and when?**
+
+| Value | Condition |
+|---|---|
+| 1.00 | 5+ hours |
+| 0.75 | 2–5 hours |
+| 0.50 | Under 2 hours |
+| +0.10 | Bonus if disruption fell during peak hours (9–11am or 6–9pm), capped at 1.0 |
+
+A 90-minute drizzle during lunchtime pays less than an all-day cyclone during peak hours. Payouts reflect actual income lost, not just trigger confirmation.
+
+**K_trust — what does this rider's history say?**
+
+| Value | Condition |
+|---|---|
+| 1.10 | 10+ consecutive verified clean claims |
+| 1.05 | 5 consecutive verified clean claims |
+| 1.00 | New rider / neutral history |
+| 0.95 | 1 flag in last 10 claims |
+| 0.90 | Unresponsive to verification |
+| 0.85 | Honest mistake (e.g. claimed wrong zone) |
+| 0.70 | First confirmed fraud — **permanent floor, never recovers** |
+| Terminated | Second confirmed fraud |
+
+Honest riders build trust over time and receive higher payouts for the same premium. Fraud is immediately penalised — the very next claim after a fraud detection inherits the reduced score with no grace window. A 30-day payout freeze accompanies first confirmed fraud. The permanent 0.70 floor means the rider can't escape by staying on the platform — they're economically marked forever without needing to be blacklisted.
+
+**What the rider sees in their SMS:**
+```
+Disruption verified:    Rs.400  (full trigger amount)
+Verification score:     × 0.75  (one source confirmed)
+Disruption duration:    × 0.75  (3 hrs, lull period)
+Your trust score:       × 1.05  (5 clean claims — thank you)
+────────────────────────────────
+Your payout:            Rs.236
+```
+
+No black box. Arjun always knows exactly why he received what he received.
+
+### Unit Economics
+
+The 15x worst-case payout ratio works because triggers are zone-specific. On a typical disruption day, only 1–2 zones are affected — at most 20–25% of riders claim simultaneously. A 500-rider pool at Plus tier generates Rs.37,000/week. A single-zone flood day costs Rs.24,000–28,000 in payouts. Pool holds.
+
+For genuine citywide events (all zones simultaneously), a per-zone weekly payout cap at 2× that zone's premium contribution protects the liquidity pool. In production, Rakshak would carry reinsurance for claims exceeding 40% of the active pool — standard parametric practice. Break-even sits at approximately 2,000 active riders per city, realistic given combined Zepto/Blinkit rider counts in any tier-1 Indian city exceed 10,000–15,000.
 
 ---
 
-## 7. AI/ML Integration Plan
+## 6. AI/ML Architecture
 
-### 7.1 Dynamic Premium Calculation (Weekly)
+### Premium model
+Gradient Boosting Regressor (scikit-learn) trained on IMD historical weather records, zone-level disruption frequency, and synthetic rider profiles. Runs every Monday at 6am. Output: personalised weekly premium Rs.49–99.
 
-- **Model**: Gradient Boosting Regressor
-- **Framework**: scikit-learn
-- **Training data**: Synthetic dataset built on IMD historical weather records, disruption frequency per zone, and modelled worker activity patterns
-- **Runs**: Every Monday at 6:00am for all active policyholders
-- **Output**: Personalised weekly premium between Rs.49 and Rs.99
+### Fraud detection — phased evolution
 
-### 7.2 Fraud Detection (Real-Time, Per Claim)
+**Phase 1: Isolation Forest**
+No labelled fraud data exists yet. Isolation Forest is the right starting point — unsupervised, trains on normal behaviour, flags deviations without needing labels. Inference runs in under 50ms per claim, well within our 15-minute payout SLA.
 
-- **Model**: Isolation Forest (unsupervised anomaly detection)
-- **Framework**: scikit-learn
-- **Runs**: Synchronously on every auto-generated claim before payout release
-- **Layered approach**: Rule-based pre-filter, then ML anomaly score, then risk decision
-- Full detail in Section 8
+**Phase 2: Autoencoder added alongside**
+An autoencoder learns to compress and reconstruct normal rider behaviour. When it sees a fraud pattern, reconstruction error spikes. The key advantage over Isolation Forest: it catches joint behavioural anomalies — patterns that look individually plausible on every feature but are collectively impossible. GPS spoofing and coordinated ring attacks almost always leave this kind of multi-signal fingerprint. If Isolation Forest and Autoencoder scores disagree on a claim, it routes to human review. Implementation is contingent on having sufficient synthetic data volume; if not ready by Phase 2, the ensemble moves to Phase 3.
 
-### 7.3 Predictive Disruption Alerts (Proactive)
+**Phase 3: XGBoost supervised classifier**
+By Phase 3, resolved claim history gives us labelled data (approved / flagged / rejected). XGBoost takes over as the primary model — it handles the class imbalance (fraud is ~10–15% of claims) cleanly via `scale_pos_weight`, and produces feature importance scores so reviewers can audit exactly why a claim was flagged. A new feature is added at this stage: `historical_k_trust`, feeding the rider's trust score back into the model as a fraud signal. Isolation Forest stays running in parallel as an out-of-distribution fallback — new fraud techniques that the supervised model hasn't seen yet will still score high on the anomaly detector. The classifier is retrained monthly on fresh labelled data to stay ahead of evolving fraud patterns.
 
-- **Approach**: Time-series analysis on IMD 7-day forecast data per zone
-- **Output**: Next-day disruption probability per zone
-- **Use cases**: Workers receive a proactive SMS the evening before a likely disruption day. The admin dashboard shows predicted claim volume for the next 7 days. The insurer can adjust reserve levels dynamically based on forecast risk.
-
-### 7.4 ML Evolution Strategy: Phase 1 to Phase 3
-
-**Why Isolation Forest for Phase 1**
-
-We have no labelled fraud data. Rakshak doesn't exist yet, so there are no historical claims to learn from. Isolation Forest is the correct choice here — it's an unsupervised anomaly detector that trains on normal behaviour and flags deviations, no fraud labels required. It's also fast enough to run synchronously on each claim (inference in under 50ms on a standard instance), which matters for our 15-minute payout SLA.
-
-The limitation is that it flags anomalies generically. It will catch a spoofed GPS claim and a genuine worker with a broken accelerometer with the same score. That's acceptable at Phase 1 because our rule-based pre-filter handles the obvious cases, and the medium-risk hold queue gives us a human review fallback.
-
-**The upgrade path: Phase 3 supervised classifier**
-
-By the time we reach Phase 3, we'll have two things we don't have now: a labelled dataset of resolved claims (approved, flagged, rejected) from Phase 2 demos and synthetic runs, and a clearer picture of which features actually discriminated between genuine and fraudulent claims in practice.
-
-At that point we'll train an XGBoost classifier on this labelled history. XGBoost is the right choice for this transition for a few reasons: it handles the class imbalance (fraud is ~10–15% of claims) well with the `scale_pos_weight` parameter, it gives us feature importance scores so we can audit which signals are actually driving rejections (important for the fairness argument), and it consistently outperforms Isolation Forest on tabular fraud detection once labels exist — this is well-documented in the payment fraud literature.
-
-We keep Isolation Forest running in parallel as a secondary signal for out-of-distribution patterns that the supervised model hasn't seen before. New fraud techniques that don't match the training distribution will still score high on the anomaly detector even if the classifier misses them.
-
-Target outcome for Phase 3 model: false positive rate under 2% on genuine claims, with full feature importance output visible on the admin dashboard so reviewers can see exactly why a claim was flagged.
+### Predictive disruption alerts
+Time-series analysis on IMD 7-day forecast data per zone outputs a next-day disruption probability. Workers get a proactive SMS the evening before. The admin dashboard shows predicted claim volume for the coming week so the insurer can adjust reserve levels dynamically.
 
 ---
 
-## 8. Fraud Detection System
+## 7. Scenarios
 
-### 8.1 Threat Model
+### Scenario 1 — Northeast monsoon flood, October, Velachery
 
-Parametric insurance is vulnerable to organised fraud because payouts are automated. Key threats in the Q-Commerce context:
+IMD red alert. Rainfall exceeds 70mm in 3 hours. Velachery roads submerged by 9am.
 
-- **GPS spoofing**: Worker simulates zone presence during a disruption while actually elsewhere
-- **Coordinated fraud**: Group of workers synchronise fake location data to trigger false claims
-- **Context mismatch**: Claiming disruption during normal conditions
-- **Static spoofing**: Faking zero movement to simulate a work stoppage
+- 08:45am: Trigger engine detects > 65mm via IMD API
+- 08:47am: Order volume drop > 60% confirmed on Zepto mock API for Velachery zone
+- 08:48am: K_event = 1.0 (dual verified). K_severity = 1.0 + peak bonus, capped at 1.0. Arjun's K_trust = 1.05 (6 clean claims)
+- 08:50am: Payout = Rs.400 × 1.0 × 1.0 × 1.05 = Rs.420, capped at Rs.380 (0.95 of coverage). Fraud check passes
+- 09:03am: Rs.380 hits Arjun's UPI. SMS with full K breakdown sent
 
-### 8.2 Dataset: Semi-Synthetic Simulation
+### Scenario 2 — Extreme heat, May, Sholinganallur
 
-Since real-world labelled fraud datasets are unavailable, we construct a semi-synthetic dataset modelling realistic Q-Commerce delivery behaviour and adversarial patterns.
+Heat index 43°C from 11am to 4pm — 5 hours, lull period only. Platform advisory unavailable.
 
-Each data point represents a 5-minute time-windowed summary:
+K_event = 0.75 (primary only). K_severity = 0.75 (medium duration, no peak bonus). K_trust = 1.0. Payout = Rs.300 × 0.75 × 0.75 × 1.0 = Rs.169. Worker also received a proactive alert the previous evening.
 
-| Feature | Description |
-|---|---|
-| avg_speed | Average speed within window |
-| max_speed | Maximum observed speed |
-| distance | Total distance travelled |
-| stationary_time | Duration with near-zero movement |
-| cluster_density | Number of nearby users in same zone |
-| weather_mismatch | Claimed vs actual weather condition |
-| region_id | Encoded geographic zone |
-| device_risk | Device integrity indicator between 0 and 1 |
+### Scenario 3 — Partial verification, honest rider protected
 
-**Dataset composition:**
-- Total samples: approximately 5,000–10,000
-- Normal behaviour: 85–90%
-- Fraud patterns: 10–15%
-- Simulated users: approximately 80–120
-- Time windows per user: approximately 80–120
+Moderate rain, IMD sub-threshold, secondary API inconclusive. Binary system would reject. Rakshak pays Rs.400 × 0.50 × 0.75 × 1.0 = Rs.150. Arjun gets something. The system's uncertainty never becomes his problem.
 
-### 8.3 Normal Behaviour Simulation
+### Scenario 4 — Coordinated fraud ring detected
 
-Normal delivery behaviour is generated using constrained stochastic processes:
-
-- Speed is generated with a base range of 20–45 km/h with small random noise to simulate natural variation
-- Movement continuity is maintained by updating location in small steps. Latitude and longitude changes are sampled from a normal distribution with very small variance, producing smooth movement rather than abrupt jumps
-- Context-aware adjustments include reduced speed during simulated rain and increased cluster density in high-traffic zones
-- Temporal variation includes higher cluster density during peak hours and lower activity during off-hours
-
-### 8.4 Fraud Pattern Injection
-
-| Fraud Type | Behavioural Signature |
-|---|---|
-| Teleportation | Large spatial displacement in short time, with implied speed exceeding physical constraints |
-| Static spoofing | Near-zero movement and high stationary time despite an active claim |
-| Coordinated fraud | Multiple users at identical or near-identical locations with high cluster density in short intervals |
-| Context mismatch | Claim indicates disruption while actual API conditions show a normal environment |
-
-### 8.5 Feature Engineering
-
-**Movement features:**
-- `avg_speed` = total_distance / total_time
-- `max_speed` = max(segment_speeds)
-- `distance` = sum of segment distances
-- `stationary_time` = duration where speed is below threshold
-
-**Context features:**
-- `weather_mismatch` = 1 if claimed condition does not match actual API condition
-- `region_id` = categorical zone encoding
-
-**Coordination feature:**
-- `cluster_density` = count of users within radius r at the same time window
-
-**Device signal:**
-- `device_risk` is a value between 0 and 1 representing the device integrity score
-
-### 8.6 Model Design: Isolation Forest
-
-| Hyperparameter | Value |
-|---|---|
-| n_estimators | 100 |
-| contamination | 0.05 |
-| max_samples | auto |
-| random_state | fixed |
-
-**Training strategy:**
-- Trained primarily on normal behaviour data
-- Fraud samples held out for validation only, not used in training
-- No labelled data required — true unsupervised detection
-
-**Output**: Continuous anomaly score plus binary decision (normal / anomaly)
-
-### 8.7 Rule-Based Validation Layer
-
-Applied as a deterministic pre-filter before the ML model:
-- `max_speed` > 80 km/h flags instantly (not physically possible for a city 2-wheeler)
-- Displacement > 5km in under 5 minutes flags as teleportation
-- `weather_mismatch` = 1 flags as context mismatch
-- `cluster_density` above 95th percentile flags as potential coordination
-
-### 8.8 Decision Engine
-
-| Risk Score | Action |
-|---|---|
-| Low | Approve, payout released |
-| Medium | Flag, queued for 2-hour passive re-validation |
-| High | Reject, claim denied and worker notified with appeal option |
+Cluster of 60 workers file simultaneously from near-identical GPS coordinates within a 90-second window. Ring detection flags the cluster. Fraud confirmed via device diversity check and motion analysis. K_event forced to 0 for all 60 claims. 30-day freeze applied. K_trust drops to permanent 0.70 floor. Second offence on any account triggers policy termination.
 
 ---
 
-## 9. Adversarial Defense and Anti-Spoofing Strategy
+## 8. Fraud Detection and Anti-Spoofing
 
-This section addresses the coordinated GPS spoofing threat scenario: a syndicate of delivery workers using spoofing applications to fake location presence in a disruption zone and trigger mass false payouts.
+### The core problem
 
-### 9.1 The Differentiation Problem: Stranded Worker vs. Bad Actor
+GPS verification checks one thing. A spoofing app fakes exactly one thing. Rakshak requires five independent signals to agree simultaneously:
 
-Simple GPS verification cannot tell apart a genuinely stranded Arjun from someone sitting at home running a spoofing app. Rakshak solves this through behavioural consistency scoring across multiple independent signals, not location data alone.
+1. GPS coordinates — necessary, not sufficient
+2. Behavioural motion — avg_speed, max_speed, stationary_time patterns. A spoofed actor at home shows unnaturally smooth or static motion lacking real outdoor micro-variation
+3. Platform order volume — did the disruption actually suppress dispatches in this zone?
+4. Environmental cross-match — two external APIs must independently confirm the event
+5. Device signals — accelerometer, gyroscope, WiFi network, battery drain. Home device usage patterns are detectably different from outdoor field conditions
 
-A real delivery worker stranded in a disrupted zone behaves in a specific, measurable way:
+A genuine stranded rider passes all five naturally. A spoofed claim typically fails on signals 2 and 3.
 
-- Their device shows movement patterns consistent with someone waiting near or attempting to navigate their usual zone
-- Speed readings fluctuate naturally, including small movements, phone handling, and repositioning
-- Their order acceptance rate on the platform drops to zero because no orders are being dispatched to that zone
-- Battery drain and network signal patterns are consistent with outdoor device usage in adverse conditions
+### Coordinated ring detection
 
-A spoofing actor sitting at home looks different across these signals:
+Individual fraud is hard to scale. Organised fraud leaves a statistical fingerprint:
 
-- GPS coordinates place them in the zone, but motion data shows stationary or unnaturally smooth patterns
-- Speed and acceleration readings lack the micro-variation of real outdoor movement
-- Device sensor data (accelerometer, gyroscope) does not match claimed outdoor activity
-- Network handshake patterns may reflect a home Wi-Fi connection despite a claimed field location
+- **Cluster density anomaly**: coordinated fraud produces unnaturally tight GPS clusters. Genuine disruptions produce organic distributions matching registered home locations across the zone
+- **Synchronisation timing**: genuine claims arrive over a distributed window. A ring fires within seconds of each other across many accounts
+- **Claim-to-active-user ratio**: a sudden spike where 90%+ of zone workers file simultaneously is a statistical outlier. Historical zone patterns set the expected baseline
+- **Device diversity**: coordinated rings often use similar spoofing software, producing matching device_risk signatures and accelerometer fingerprints across devices
 
-**How Rakshak differentiates:**
+### UX balance — not penalising honest riders
 
-Every claim is cross-referenced across four independent signal layers before approval:
+A real rider in a flood zone may have an older device, poor connectivity, or movement patterns that superficially resemble spoofing. Wrongly rejecting his claim is a product failure.
 
-1. **GPS coordinates**: necessary but not sufficient on their own
-2. **Behavioural motion signals**: avg_speed, max_speed, and stationary_time patterns across the 5-minute window
-3. **Platform-side signals**: order dispatch volume in the worker's zone from the mock platform API, confirming whether the disruption actually suppressed platform activity
-4. **Environmental cross-match**: the claimed disruption event must be independently confirmed by at least two external APIs (e.g., IMD rainfall data plus platform order volume drop in the same zone)
+Medium-risk claims go to soft hold, not rejection. The rider gets: *"Your claim is being verified. You'll receive your payout or an update within 2 hours."* The system then checks whether other verified workers in the same sub-zone filed around the same time, and whether platform order volume in the zone dropped — both of these confirm the disruption independently of the individual's GPS data. Clean claim history triggers an automatic trust adjustment. Most genuine cases resolve within 2 hours without the rider doing anything.
 
-A genuine stranded worker passes all four layers naturally. A spoofed claim typically fails on layers 2 and 3.
-
-### 9.2 Beyond GPS: Detecting a Coordinated Ring
-
-When a syndicate coordinates, the attack leaves a statistical fingerprint that individual fraud cannot replicate:
-
-**Cluster density anomaly**: In normal disruption events, workers are distributed across a zone proportionally to their registered home locations. Coordinated fraud produces an unnaturally high density of claims originating from the same micro-location or showing near-identical GPS coordinates with only minor offsets.
-
-**Synchronisation timing**: Genuine claims arrive over a distributed time window as different workers encounter the disruption at different moments. A coordinated ring triggers claims within a suspiciously narrow window, often within seconds of each other across many accounts.
-
-**Claim-to-active-user ratio**: On a genuine disruption day, the ratio of claims to registered active workers in a zone follows historical patterns for that zone. A sudden spike where 90%+ of zone workers file simultaneously is a statistical outlier that gets flagged immediately.
-
-**Velocity consistency**: Real workers in a disrupted zone show irregular, low-speed movement consistent with the disruption type. Spoofed actors tend to show perfectly static GPS or movement that lacks the micro-jitter of genuine handheld device use outdoors.
-
-**Device diversity check**: A coordinated ring often uses similar spoofing software, producing recognisable device_risk signatures and similar accelerometer fingerprints across many devices at the same time.
-
-Rakshak's Isolation Forest model is trained on these coordination patterns and flags clusters where multiple workers share anomalous similarity across these features simultaneously.
-
-### 9.3 UX Balance: Handling Flagged Claims Without Penalising Honest Workers
-
-A real worker in a genuine disruption zone may have connectivity issues, an older device, or movement patterns that superficially resemble spoofing. Wrongly rejecting his claim would be a serious failure of the product.
-
-**How Rakshak handles medium-risk flags:**
-
-The payout is not immediately rejected. It moves to a temporary hold state, not a denial. The worker receives an SMS: "Your claim is being verified. You will receive your payout or an update within 2 hours."
-
-A lightweight secondary verification then runs automatically:
-- The system checks whether other workers in the same sub-zone also filed claims around the same time. If they are verified, this corroborates that the disruption was real
-- The system checks whether platform order volume in that zone dropped significantly, which confirms the disruption independently of any individual GPS data
-- If the worker has a clean claim history with no prior fraud flags, the system applies a trust adjustment that reduces the anomaly weight automatically
-
-If the medium-risk claim cannot be auto-resolved within 2 hours, a human reviewer gets a simple dashboard view showing the worker's motion trace, the zone disruption data, and the anomaly score breakdown. Most genuine cases are resolved within the 2-hour window without the worker needing to do anything at all.
-
-**What we do not do:**
-- We do not ask workers to upload photos or videos as proof — this burdens legitimate claimants and is easily gamed
-- We do not reject based on a single anomalous signal
-- We do not penalise a worker's future premiums based on a flagged-but-resolved claim
-
-**False positive target**: Our fraud model targets a maximum 2% false positive rate on genuine claims. A flagged honest worker gets their payout within 2 hours if zone-level corroborating data confirms the disruption. Only claims where both individual signals and zone signals are simultaneously anomalous result in outright rejection.
+We do not ask for photo or video proof. We do not reject on a single anomalous signal. We do not penalise future premiums for a flagged-but-resolved claim.
 
 ---
 
-## 10. Tech Stack and Development Plan
+## 9. Tech Stack
 
-### Platform Choice: Web (Mobile-First PWA)
+**Platform**: Mobile-first Progressive Web App. No app store install required — matters for riders on budget Android devices with limited storage.
 
-A Progressive Web App is accessible without requiring app store installation, which matters for workers with limited storage on budget Android devices. A mobile-first React PWA with offline capability is the right delivery mechanism for this user group.
-
-### Tech Stack
-
-| Layer | Technology | Purpose |
-|---|---|---|
-| Frontend | React + Tailwind CSS (PWA) | Worker app + Admin dashboard |
-| Backend | Python FastAPI | REST API, trigger engine, claim processor |
-| Database | PostgreSQL | Profiles, policies, claims, audit trail |
-| ML / AI | scikit-learn | Premium model + Isolation Forest fraud detection |
-| Weather API | OpenWeatherMap (free tier) | Rainfall, heat index, real-time conditions |
-| Alert API | NDMA RSS + IMD public feed | Cyclone and disaster alerts |
-| AQI API | CPCB / AQI India API | Air quality monitoring |
-| News API | NewsAPI.org (free tier) | Bandh / civic shutdown detection |
-| Payment | Razorpay test mode | Premium collection + payout simulation |
-| Notifications | Twilio SMS (trial) | Claim and payout alerts to workers |
-| Hosting | Railway / Render (free tier) | Backend deployment |
+| Layer | Technology |
+|---|---|
+| Frontend | React + Tailwind CSS (PWA) |
+| Backend | Python FastAPI |
+| Database | PostgreSQL |
+| ML / AI | scikit-learn (Phase 1–2), XGBoost (Phase 3) |
+| Weather | OpenWeatherMap free tier |
+| Disaster alerts | NDMA RSS + IMD public feed |
+| AQI | CPCB / AQI India API |
+| News / bandh detection | NewsAPI.org free tier |
+| Payments | Razorpay test mode |
+| Notifications | Twilio SMS trial |
+| Hosting | Railway / Render free tier |
 
 ---
