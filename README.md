@@ -1,4 +1,4 @@
-# GigShield: AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
+# Rakshak: AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
 
 > **Guidewire DEVTrails 2026** | Phase 1 Submission
 
@@ -64,11 +64,11 @@ Unlike Zomato/Swiggy riders, Arjun cannot relocate to find orders. He is assigne
 
 ## 3. Solution Overview
 
-**GigShield** is an AI-powered parametric income insurance platform for Q-Commerce delivery partners. It provides automated weekly coverage with zero-touch claims, no forms, no manual verification, no waiting.
+**Rakshak** is an AI-powered parametric income insurance platform for Q-Commerce delivery partners. It provides automated weekly coverage with zero-touch claims, no forms, no manual verification, no waiting.
 
 ### Core Principle
 
-When an external disruption event is verified by objective data, GigShield automatically initiates a payout to the worker's UPI within 15 minutes. Arjun never files a claim. The system does it for him.
+When an external disruption event is verified by objective data, Rakshak automatically initiates a payout to the worker's UPI within 15 minutes. Arjun never files a claim. The system does it for him.
 
 ### 5-Step Flow
 
@@ -78,7 +78,7 @@ When an external disruption event is verified by objective data, GigShield autom
 
 1. **Onboard**: Arjun signs up in roughly 3 minutes. Links his Zepto/Blinkit worker ID. Selects home zone. KYC via Aadhaar OTP.
 2. **Buy weekly policy**: Every Monday, the AI model calculates his personalised weekly premium (Rs.49-99). He pays via UPI and coverage starts immediately.
-3. **Monitoring**: GigShield's trigger engine polls weather, AQI, alert, and news APIs every 15 minutes across all active zones.
+3. **Monitoring**: Rakshak's trigger engine polls weather, AQI, alert, and news APIs every 15 minutes across all active zones.
 4. **Auto claim**: When a trigger threshold is breached and cross-validated, a claim is automatically created and Arjun receives an SMS.
 5. **Instant payout**: After fraud validation passes, UPI transfer is initiated within 15 minutes.
 
@@ -100,32 +100,32 @@ When an external disruption event is verified by objective data, GigShield autom
 
 **Event**: IMD issues red alert. Rainfall exceeds 70mm in 3 hours. Velachery roads submerged.
 
-**Without GigShield**: Arjun cannot reach his dark store. Earns Rs.0 for the day, losing Rs.800 in income he was counting on.
+**Without Rakshak**: Arjun cannot reach his dark store. Earns Rs.0 for the day, losing Rs.800 in income he was counting on.
 
-**With GigShield**:
+**With Rakshak**:
 - 08:45am: Trigger engine detects rainfall > 65mm threshold via IMD API
 - 08:47am: Cross-validates order volume drop > 60% on Zepto/Blinkit mock API for Velachery zone
 - 08:48am: Trigger confirmed. Fraud engine checks Arjun's GPS is within his registered zone
 - 08:50am: Claim auto-created. Rs.400 payout initiated to Arjun's UPI
-- 09:03am: Arjun receives Rs.400 and SMS: "GigShield payout credited for rainfall disruption in your zone"
+- 09:03am: Arjun receives Rs.400 and SMS: "Rakshak payout credited for rainfall disruption in your zone"
 
 ### Scenario 2: Cyclone Alert (December, Bay of Bengal)
 
 **Event**: IMD issues orange cyclone warning for Tamil Nadu coast. Zepto suspends operations in Chennai.
 
-**With GigShield**: IMD orange alert detected via NDMA RSS feed, platform suspension cross-validated, Rs.600/day payout automatically initiated per affected worker. No action required from Arjun.
+**With Rakshak**: IMD orange alert detected via NDMA RSS feed, platform suspension cross-validated, Rs.600/day payout automatically initiated per affected worker. No action required from Arjun.
 
 ### Scenario 3: Extreme Heat (May, Sholinganallur)
 
 **Event**: Heat index crosses 43 degrees C for 5 consecutive hours.
 
-**With GigShield**: OpenWeatherMap heat index API triggers at sustained > 42 degrees C, Rs.300 partial payout initiated, workers also receive a proactive SMS warning the evening before a predicted heat disruption day.
+**With Rakshak**: OpenWeatherMap heat index API triggers at sustained > 42 degrees C, Rs.300 partial payout initiated, workers also receive a proactive SMS warning the evening before a predicted heat disruption day.
 
 ### Scenario 4: Political Bandh
 
 **Event**: Unplanned hartal called. Roads blocked. Zero platform orders across zone.
 
-**With GigShield**: News API detects verified bandh keyword cluster for Chennai, order volume drops > 80%, two-source validation confirms the shutdown, Rs.500 payout automatically initiated.
+**With Rakshak**: News API detects verified bandh keyword cluster for Chennai, order volume drops > 80%, two-source validation confirms the shutdown, Rs.500 payout automatically initiated.
 
 ### Application Workflow
 
@@ -217,7 +217,7 @@ def evaluate_triggers(zone, worker_list):
 
 ### Zone-Based Triggering
 
-Triggers are evaluated per zone, not city-wide. A flood in Velachery does not trigger payouts for workers in Anna Nagar. This zone-level precision is what separates GigShield from generic insurance products.
+Triggers are evaluated per zone, not city-wide. A flood in Velachery does not trigger payouts for workers in Anna Nagar. This zone-level precision is what separates Rakshak from generic insurance products.
 
 ---
 
@@ -358,7 +358,7 @@ This section addresses the coordinated GPS spoofing threat scenario: a syndicate
 
 ### 9.1 The Differentiation Problem: Stranded Worker vs. Bad Actor
 
-Simple GPS verification cannot tell apart a genuinely stranded Arjun from someone sitting at home running a spoofing app. GigShield solves this through behavioural consistency scoring across multiple independent signals, not location data alone.
+Simple GPS verification cannot tell apart a genuinely stranded Arjun from someone sitting at home running a spoofing app. Rakshak solves this through behavioural consistency scoring across multiple independent signals, not location data alone.
 
 A real delivery worker stranded in a flood zone behaves in a specific, measurable way:
 
@@ -374,7 +374,7 @@ A spoofing actor sitting at home looks different across these signals:
 - Device sensor data (accelerometer, gyroscope) does not match claimed outdoor activity
 - Network handshake patterns may reflect a home Wi-Fi connection despite a claimed field location
 
-**How GigShield differentiates:**
+**How Rakshak differentiates:**
 
 Every claim is cross-referenced across four independent signal layers before approval:
 
@@ -399,13 +399,13 @@ When a syndicate coordinates via Telegram, the attack leaves a statistical finge
 
 **Device diversity check**: A coordinated ring often uses similar spoofing software, producing recognisable device_risk signatures and similar accelerometer fingerprints across many devices at the same time.
 
-GigShield's Isolation Forest model is trained on these coordination patterns and flags clusters where multiple workers share anomalous similarity across these features simultaneously.
+Rakshak's Isolation Forest model is trained on these coordination patterns and flags clusters where multiple workers share anomalous similarity across these features simultaneously.
 
 ### 9.3 UX Balance: Handling Flagged Claims Without Penalising Honest Workers
 
 A real worker in a genuine flood zone may have connectivity issues, an older device, or movement patterns that superficially resemble spoofing. Wrongly rejecting his claim would be a serious failure of the product.
 
-**How GigShield handles medium-risk flags:**
+**How Rakshak handles medium-risk flags:**
 
 The payout is not immediately rejected. It moves to a temporary hold state, not a denial. The worker receives an SMS: "Your claim is being verified. You will receive your payout or an update within 2 hours."
 
