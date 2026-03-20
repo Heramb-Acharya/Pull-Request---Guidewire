@@ -262,39 +262,6 @@ We do not ask for photo or video proof. We do not reject on a single anomalous s
 
 ---
 
-## 10. Deliverables Roadmap
 
-### Phase 1 (March 4–20), current
-- [x] Persona and scenario definition
-- [x] Weekly premium model with K-factor payout system
-- [x] 5 parametric triggers with dual-source validation logic
-- [x] Fraud detection architecture: Isolation Forest + rule-based pre-filter
-- [x] Anti-spoofing strategy: 5-signal cross-validation + ring detection
-- [x] ML evolution plan: Isolation Forest → Autoencoder → XGBoost
-- [x] Tech stack finalised
-- [ ] 2-minute strategy video (in progress)
-
-### Phase 2 (March 21 – April 4), build sprint
-
-Priority is a working end-to-end flow, not polish.
-
-- Worker registration + Aadhaar OTP KYC (mocked)
-- Policy creation UI with live Monday premium calculation
-- Trigger engine polling OpenWeatherMap + NDMA RSS every 15 minutes
-- Auto-claim generation on confirmed dual-source trigger
-- Isolation Forest fraud check running synchronously before every payout
-- Autoencoder integration if synthetic data volume is sufficient, else deferred to Phase 3
-- Razorpay test-mode: premium collection + UPI payout simulation
-- Twilio SMS: K-factor breakdown sent to rider on every payout
-
-**Definition of done**: a simulated IMD flood trigger fires, fraud check passes, Rs.X payout hits a test UPI within 15 minutes, K-factor breakdown SMS delivered, zero manual steps.
-
-### Phase 3 (April 5–17), harden and scale
-
-- XGBoost supervised classifier trained on labelled Phase 2 claim history, with `historical_k_trust` as added feature. Monthly retraining pipeline set up
-- Isolation Forest retained as out-of-distribution fallback
-- Worker dashboard: active policy, earnings protected this week, next 48hr disruption forecast
-- Admin dashboard: live loss ratio per zone, predicted claim volume, fraud flag queue, K-factor analytics
-- Final 5-minute demo video: full pipeline walkthrough with simulated disruption triggering auto-claim and payout
 - Pitch deck: persona, market sizing, K-factor system, ML architecture, unit economics
 
