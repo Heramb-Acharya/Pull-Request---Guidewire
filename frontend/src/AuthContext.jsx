@@ -110,7 +110,9 @@ export function AuthProvider({ children }) {
       } else {
         // If user doesn't exist, INSERT new user
         console.log('User not found. Inserting new user into Supabase...');
+        const localId = crypto.randomUUID ? crypto.randomUUID() : ('local-' + Date.now() + '-' + Math.random().toString(36).slice(2));
         const newUser = {
+          id: localId,
           name: `Rider_${phoneStr.slice(-4)}`,
           phone: phoneStr,
           language: 'English',
@@ -130,10 +132,13 @@ export function AuthProvider({ children }) {
 
         if (insertError) {
           console.error('CRITICAL: Supabase insert failed:', insertError);
-          userData = newUser; // Fallback to local object so app doesn't crash
+          console.log('Using local fallback user with id:', localId);
+          userData = newUser; // Fallback to local object with valid id
+          localStorage.setItem('rakshak_local_user', JSON.stringify(newUser));
         } else {
           console.log('New user successfully inserted:', insertedUser.id);
           userData = insertedUser;
+          localStorage.removeItem('rakshak_local_user');
         }
       }
       
@@ -249,14 +254,22 @@ export function AuthProvider({ children }) {
   };
 
   const setPremiumStatus = async (planKey = 'standard') => {
-    if (!user || user.id === 'demo-user-123') return;
+    if (!user) return;
+    if (user.id === 'demo-user-123') return;
     console.log('Updating premium status to:', planKey);
     const { data, error } = await supabase.from('users')
       .update({ plan: planKey, is_premium_active: true })
       .eq('id', user.id)
       .select().single();
     
-    if (error) console.error('Error updating premium:', error);
+    if (error) {
+      console.error('Error updating premium in Supabase:', error);
+      // Fallback: update local state even if Supabase fails
+      const updatedUser = { ...user, plan: planKey, is_premium_active: true };
+      setUser(updatedUser);
+      localStorage.setItem('rakshak_local_user', JSON.stringify(updatedUser));
+      return;
+    }
     if (data) setUser(data);
   };
 
