@@ -217,7 +217,7 @@ Gradient Boosting Regressor (scikit-learn) trained on IMD historical weather rec
 
 ### Fraud detection, phased evolution
 
-**Phase 1: Isolation Forest, trained and integrated**
+**Phase 1: Isolation Forest, trained.**
 
 No labelled fraud data exists yet. Isolation Forest is the right starting point. Unsupervised, trains on normal behaviour, flags deviations without needing labels. Inference runs in under 50ms per claim, well within our 15-minute payout SLA.
 
