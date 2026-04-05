@@ -36,8 +36,8 @@ const PLANS = [
     { id: '99', nameKey: 'pro_plan', price: 99, icon: Star, descKey: 'pro_desc' }
 ];
 
-const OPENWEATHER_KEY = 'YOUR_API_KEY_HERE';
-const WAQI_KEY = 'YOUR_API_KEY_HERE';
+const OPENWEATHER_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || '6461c244c89bbf056353fe444a34bee7';
+const WAQI_KEY = import.meta.env.VITE_WAQI_API_KEY || '1b87e1d3150470cef63b94bdaf1c5ef6339d9eb8';
 
 export default function PremiumRegister() {
   const navigate = useNavigate();

@@ -35,3 +35,24 @@ CREATE TABLE claims (
 
 -- Note: Handle 'demo' data in AuthContext by inserting if doesn't exist.
 -- You can also optionally add Row Level Security (RLS) policies here.
+
+-- 3. Registrations Table (Policy Selections)
+CREATE TABLE registrations (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    plan_tier TEXT NOT NULL DEFAULT '74',
+    avg_daily_income NUMERIC DEFAULT 0,
+    avg_daily_orders NUMERIC DEFAULT 0,
+    working_hours NUMERIC DEFAULT 8,
+    working_time_start TEXT DEFAULT 'Morning',
+    working_days NUMERIC DEFAULT 6,
+    city TEXT DEFAULT 'Delhi',
+    risk_factor NUMERIC(5,2) DEFAULT 1.00,
+    premium NUMERIC(8,2) DEFAULT 74.00,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Disable RLS for demo (re-enable with proper policies in production)
+ALTER TABLE users DISABLE ROW LEVEL SECURITY;
+ALTER TABLE claims DISABLE ROW LEVEL SECURITY;
+ALTER TABLE registrations DISABLE ROW LEVEL SECURITY;

@@ -208,10 +208,8 @@ export function AuthProvider({ children }) {
     console.log('Submitting claim to Supabase...');
     const newClaim = {
       user_id: user.id,
-      type: [claimType],
-      trigger_type: triggers, // Keep both for safety
+      trigger_type: triggers,
       status: initStatus,
-      amount: amount,
       final_payout: amount, 
       city: city,
       plan: user.plan,
