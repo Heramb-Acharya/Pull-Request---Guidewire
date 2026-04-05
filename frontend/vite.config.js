@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   preview: {
-    allowedHosts: ['strong-charisma-production.up.railway.app'],
+    allowedHosts: ['rakshak-production.up.railway.app'],
   },
 })
