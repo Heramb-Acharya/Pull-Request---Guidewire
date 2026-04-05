@@ -1,5 +1,5 @@
 // API base URL
-const API_BASE = 'https://pull-request-guidewire-production.up.railway.app';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://pull-request-guidewire-production-d47b.up.railway.app';
 
 const api = {
   async post(path, body) {
