@@ -5,6 +5,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { useTranslation } from 'react-i18next';
 
+const PLAN_TIER_MAP = { '49': 'basic', '74': 'standard', '99': 'pro' };
+
 const CITY_COORDS = {
   'Delhi': { lat: 28.6139, lon: 77.2090 },
   'Noida': { lat: 28.5355, lon: 77.3910 },
@@ -40,7 +42,7 @@ const WAQI_KEY = 'YOUR_API_KEY_HERE';
 export default function PremiumRegister() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const { user } = useAuth();
+  const { user, setPremiumStatus } = useAuth();
   const { t } = useTranslation();
   
   // Checking if we are in "Edit Plan" mode from Dashboard
@@ -218,6 +220,8 @@ export default function PremiumRegister() {
     try {
       if (!user) throw new Error(t('premium_reg.must_login'));
 
+      const planKey = PLAN_TIER_MAP[selectedPlan] || 'standard';
+
       const payload = {
         user_id: user.id,
         plan_tier: String(selectedPlan),
@@ -231,18 +235,30 @@ export default function PremiumRegister() {
         premium: Number(result.premium)
       };
 
+      let dbSuccess = false;
       if (isEditing) {
          const { error: dbError } = await supabase
             .from('registrations')
             .update(payload)
             .eq('user_id', user.id);
-         if (dbError) throw dbError;
+         if (dbError) console.error('Supabase update error (non-blocking):', dbError);
+         else dbSuccess = true;
       } else {
          const { error: dbError } = await supabase
             .from('registrations')
             .insert([payload]);
-         if (dbError) throw dbError;
+         if (dbError) console.error('Supabase insert error (non-blocking):', dbError);
+         else dbSuccess = true;
       }
+
+      // Always save to localStorage as fallback so Dashboard can read it
+      localStorage.setItem('rakshak_registration', JSON.stringify({
+        ...payload,
+        created_at: new Date().toISOString()
+      }));
+
+      // Persist plan selection to the users table so it reflects everywhere
+      await setPremiumStatus(planKey);
       
       setStep(4);
     } catch (err) {

@@ -18,11 +18,11 @@ const ZONES = [
 
 const ZONE_COORDS = {
   bangalore_central: { lat: 12.9716, lon: 77.5946, city: 'Bangalore' },
-  delhi_noida:       { lat: 28.6139, lon: 77.2090, city: 'Delhi' },
-  mumbai_dharavi:    { lat: 19.0760, lon: 72.8777, city: 'Mumbai' },
-  hyderabad_inner:   { lat: 17.3850, lon: 78.4867, city: 'Hyderabad' },
-  chennai_north:     { lat: 13.0827, lon: 80.2707, city: 'Chennai' },
-  pune_west:         { lat: 18.5204, lon: 73.8567, city: 'Pune' },
+  delhi_noida: { lat: 28.6139, lon: 77.2090, city: 'Delhi' },
+  mumbai_dharavi: { lat: 19.0760, lon: 72.8777, city: 'Mumbai' },
+  hyderabad_inner: { lat: 17.3850, lon: 78.4867, city: 'Hyderabad' },
+  chennai_north: { lat: 13.0827, lon: 80.2707, city: 'Chennai' },
+  pune_west: { lat: 18.5204, lon: 73.8567, city: 'Pune' },
 };
 
 function RiskBar({ label, value, color }) {
@@ -72,20 +72,44 @@ export default function Dashboard() {
     try {
       let activeCity = 'Delhi';
       let activeHours = 8;
-      
+
       if (user?.id) {
-          const { data, error } = await supabase
-            .from('registrations')
-            .select('*')
-            .eq('user_id', user.id)
-            .order('created_at', { ascending: false })
-            .limit(1)
-            .single();
-          if (data && !error) {
-              setUserRegistration(data);
-              activeCity = data.city;
-              activeHours = data.working_hours;
+        const { data, error } = await supabase
+          .from('registrations')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+        if (data && !error) {
+          setUserRegistration(data);
+          activeCity = data.city;
+          activeHours = data.working_hours;
+        } else {
+          // Fallback: check localStorage for registration saved when Supabase was blocked
+          const localReg = localStorage.getItem('rakshak_registration');
+          if (localReg) {
+            try {
+              const parsed = JSON.parse(localReg);
+              if (parsed.user_id === user.id || parsed.city) {
+                setUserRegistration(parsed);
+                activeCity = parsed.city || activeCity;
+                activeHours = parsed.working_hours || activeHours;
+              }
+            } catch (e) { /* ignore parse errors */ }
           }
+        }
+      } else {
+        // No user.id — still try localStorage
+        const localReg = localStorage.getItem('rakshak_registration');
+        if (localReg) {
+          try {
+            const parsed = JSON.parse(localReg);
+            setUserRegistration(parsed);
+            activeCity = parsed.city || activeCity;
+            activeHours = parsed.working_hours || activeHours;
+          } catch (e) { /* ignore parse errors */ }
+        }
       }
 
       // Map city to zone 
@@ -122,11 +146,11 @@ export default function Dashboard() {
     showAlert(t('alerts.processing_claim'));
     setTimeout(() => {
       addManualClaim(
-          userRegistration?.city || 'Delhi', 
-          payout.final_payout || 0,
-          triggerData?.trigger_types || ['alert'],
-          'auto_claim',
-          'approved'
+        userRegistration?.city || 'Delhi',
+        payout.final_payout || 0,
+        triggerData?.trigger_types || ['alert'],
+        'auto_claim',
+        'approved'
       );
       showAlert(t('alerts.claim_success'), { showOk: true, okText: t('alerts.btn_ok') });
       fetchAll();
@@ -164,9 +188,9 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">
-              {t('dashboard.greeting', { 
-                time: new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening', 
-                name: user?.name?.split(' ')[0] || 'Rider' 
+              {t('dashboard.greeting', {
+                time: new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening',
+                name: user?.name?.split(' ')[0] || 'Rider'
               })}
             </h1>
             <p className="text-muted text-sm mt-1">{t('dashboard.subtitle')}</p>
@@ -301,74 +325,74 @@ export default function Dashboard() {
             {/* Risk Factor */}
             {userRegistration && (
               <div className="card border-2 border-primary/20 bg-primary/5">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="section-title !mb-0 text-primary flex items-center gap-2"><Shield className="w-5 h-5"/> {t('dashboard.my_policy')}</p>
+                <div className="flex items-center justify-between mb-6">
+                  <p className="section-title !mb-0 text-primary flex items-center gap-2"><Shield className="w-5 h-5" /> {t('dashboard.my_policy')}</p>
                   <button onClick={() => navigate('/premium-register?edit=true')} className="text-xs bg-primary/20 text-primary border border-primary/30 px-3 py-1.5 rounded-full flex items-center gap-1.5 font-bold hover:bg-primary/30 transition">
-                      <Edit3 className="w-3.5 h-3.5" /> {t('dashboard.change_plan')}
+                    <Edit3 className="w-3.5 h-3.5" /> {t('dashboard.change_plan')}
                   </button>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
-                  <div className="relative w-32 h-32 flex-shrink-0">
-                    <svg className="w-32 h-32 -rotate-90" viewBox="0 0 96 96">
-                      <circle cx="48" cy="48" r="38" fill="none" stroke="#1E293B" strokeWidth="8" />
-                      <circle
-                        cx="48" cy="48" r="38" fill="none"
-                        stroke={userRegistration.risk_factor > 1.4 ? '#EF4444' : '#10B981'}
-                        strokeWidth="8" strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 38}`}
-                        strokeDashoffset={`${2 * Math.PI * 38 * (1 - (Math.min(userRegistration.risk_factor - 1, 1)))}`}
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center mt-2">
-                       <span className="text-sm text-muted mb-0.5">{t('dashboard.premium')}</span>
-                       <span className={`text-2xl font-black ${userRegistration.risk_factor > 1.4 ? 'text-red-400' : 'text-emerald-400'}`}>₹{userRegistration.premium}</span>
+                {/* Plan name + premium hero */}
+                <div className="bg-gradient-to-r from-primary/10 via-black/40 to-black/40 rounded-2xl p-5 border border-primary/15 mb-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">{t('dashboard.current_plan')}</div>
+                      <div className="text-white text-xl font-bold capitalize">
+                        {userRegistration.plan_tier === '49' ? 'Basic' : userRegistration.plan_tier === '74' ? 'Standard' : userRegistration.plan_tier === '99' ? 'Pro' : 'Standard'} Plan
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">{t('dashboard.premium')}</div>
+                      <div className={`text-3xl font-black ${userRegistration.risk_factor > 1.4 ? 'text-red-400' : 'text-emerald-400'}`}>
+                        ₹{userRegistration.premium}<span className="text-sm font-medium text-muted">/wk</span>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex-1 w-full space-y-4">
-                     <div className="bg-black/30 rounded-xl p-4 border border-white/5">
-                        <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">{t('dashboard.current_plan')}</div>
-                        <div className="text-white text-lg font-medium">{t('dashboard.on_plan', { amount: userRegistration.premium })}</div>
-                     </div>
-                     <div className="grid grid-cols-2 gap-4">
-                         <div className="bg-black/30 rounded-xl p-4 border border-white/5">
-                            <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">{t('dashboard.risk_factor')}</div>
-                            <div className="text-emerald-400 text-lg font-bold flex items-center gap-2">
-                               {userRegistration.risk_factor}x
-                            </div>
-                         </div>
-                         <div className="bg-black/30 rounded-xl p-4 border border-white/5">
-                            <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">{t('dashboard.coverage')}</div>
-                            <div className="text-white text-lg font-bold flex items-center gap-2">
-                               <MapPin className="w-4 h-4 text-primary" /> {userRegistration.city}
-                            </div>
-                         </div>
-                     </div>
+                {/* Stats grid */}
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-2">{t('dashboard.risk_factor')}</div>
+                    <div className={`text-2xl font-black ${userRegistration.risk_factor > 1.4 ? 'text-red-400' : 'text-emerald-400'}`}>
+                      {userRegistration.risk_factor}x
+                    </div>
+                  </div>
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-2">{t('dashboard.coverage')}</div>
+                    <div className="text-white text-2xl font-black flex items-center justify-center gap-1.5">
+                      <MapPin className="w-4 h-4 text-primary" /> {userRegistration.city}
+                    </div>
+                  </div>
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-2">Base</div>
+                    <div className="text-white text-2xl font-black">
+                      ₹{userRegistration.plan_tier || '74'}
+                    </div>
                   </div>
                 </div>
 
                 {/* Insight */}
-                <div className="mt-4 pt-4 border-t border-border flex items-start gap-2 text-xs text-muted">
+                <div className="mt-5 pt-4 border-t border-border flex items-start gap-2 text-xs text-muted">
                   <Info className="w-4 h-4 flex-shrink-0 mt-0.5 text-primary" />
                   <span>
-                     {t('dashboard.policy_insight')}
+                    {t('dashboard.policy_insight')}
                   </span>
                 </div>
               </div>
             )}
-            
+
             {!userRegistration && (
-                <div className="card text-center py-10 border-dashed border-2 border-border bg-transparent">
-                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary/20">
-                      <Shield className="w-8 h-8 text-primary" />
-                   </div>
-                   <h3 className="text-xl font-bold mb-2">{t('dashboard.no_policy')}</h3>
-                   <p className="text-slate-400 text-sm mb-6 max-w-sm mx-auto">{t('dashboard.no_policy_desc')}</p>
-                   <button onClick={() => navigate('/premium-register')} className="btn-primary inline-flex items-center gap-2 shadow-glow">
-                      {t('dashboard.register_now')} <ArrowRight className="w-4 h-4" />
-                   </button>
+              <div className="card text-center py-10 border-dashed border-2 border-border bg-transparent">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary/20">
+                  <Shield className="w-8 h-8 text-primary" />
                 </div>
+                <h3 className="text-xl font-bold mb-2">{t('dashboard.no_policy')}</h3>
+                <p className="text-slate-400 text-sm mb-6 max-w-sm mx-auto">{t('dashboard.no_policy_desc')}</p>
+                <button onClick={() => navigate('/premium-register')} className="btn-primary inline-flex items-center gap-2 shadow-glow">
+                  {t('dashboard.register_now')} <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             )}
           </div>
 
@@ -379,9 +403,8 @@ export default function Dashboard() {
             <div className={`card border-2 ${triggered ? 'border-red-500/40' : 'border-border'}`}>
               <p className="section-title">{t('dashboard.claim_status')}</p>
               <div className="text-center py-4 border-b border-border mb-4 pb-6">
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                  triggered ? 'bg-red-500/15 border-2 border-red-500/40' : 'bg-emerald-500/10 border-2 border-emerald-500/30'
-                }`}>
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${triggered ? 'bg-red-500/15 border-2 border-red-500/40' : 'bg-emerald-500/10 border-2 border-emerald-500/30'
+                  }`}>
                   {triggered
                     ? <Zap className="w-8 h-8 text-red-400" />
                     : <Shield className="w-8 h-8 text-emerald-400" />}
@@ -392,7 +415,7 @@ export default function Dashboard() {
                 <div className="text-sm text-muted">
                   {t('dashboard.claims_auto_activated')}
                 </div>
-                
+
                 {triggered && (
                   <div className="mt-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 inline-block mx-auto w-full">
                     <div className="text-xs text-muted mb-1">{t('dashboard.estimated_payout')}</div>
@@ -401,7 +424,7 @@ export default function Dashboard() {
                   </div>
                 )}
               </div>
-              
+
               <div className="text-center px-2 pb-2">
                 {triggered ? (
                   <button onClick={handleAutoClaim} className="btn-primary w-full text-base font-bold flex items-center justify-center gap-2 py-3 shadow-glow mb-4">

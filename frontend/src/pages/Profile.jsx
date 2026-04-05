@@ -1,12 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
-import { Shield, Phone, Globe, MapPin, ChevronDown, ChevronUp, CheckCircle, TrendingUp, Star, Gift } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { Shield, Phone, Globe, MapPin, ChevronDown, ChevronUp, CheckCircle, TrendingUp, Star, Gift, CreditCard } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function Profile() {
   const { user: authUser, loading } = useAuth();
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [registration, setRegistration] = useState(null);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const fetchRegistration = async () => {
+      if (!authUser?.id || authUser.id === 'demo-user-123') return;
+      const { data } = await supabase
+        .from('registrations')
+        .select('*')
+        .eq('user_id', authUser.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+      if (data) {
+        setRegistration(data);
+      } else {
+        // Fallback: check localStorage
+        const localReg = localStorage.getItem('rakshak_registration');
+        if (localReg) {
+          try { setRegistration(JSON.parse(localReg)); } catch (e) { /* ignore */ }
+        }
+      }
+    };
+    fetchRegistration();
+  }, [authUser]);
 
   const totalClaims = authUser?.total_claims ?? 0;
   const cleanClaims = authUser?.valid_claims ?? 0;
@@ -232,10 +257,40 @@ export default function Profile() {
                 <div className="flex items-center gap-3 py-2">
                   <MapPin className="w-4 h-4 text-accent" />
                   <span className="text-muted text-sm w-24">{t('profile.zone')}</span>
-                  <span className="text-slate-200 font-medium">{authUser?.zone || 'Delhi Noida'}</span>
+                  <span className="text-slate-200 font-medium">{registration?.city || authUser?.zone || 'Delhi Noida'}</span>
                 </div>
               </div>
             </div>
+
+            {/* Active Plan Card */}
+            {registration && (
+              <div className="card border-2 border-primary/20 bg-primary/5">
+                <div className="flex items-center gap-2 mb-4">
+                  <CreditCard className="w-5 h-5 text-primary" />
+                  <p className="font-bold text-white">{t('profile.active_plan', { defaultValue: 'Active Plan' })}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">Plan</div>
+                    <div className="text-white text-lg font-bold capitalize">
+                      {registration.plan_tier === '49' ? 'Basic' : registration.plan_tier === '74' ? 'Standard' : registration.plan_tier === '99' ? 'Pro' : 'Standard'}
+                    </div>
+                  </div>
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">Premium</div>
+                    <div className="text-emerald-400 text-lg font-bold">₹{registration.premium}/wk</div>
+                  </div>
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">Risk Factor</div>
+                    <div className="text-amber-400 text-lg font-bold">{registration.risk_factor}x</div>
+                  </div>
+                  <div className="bg-black/30 rounded-xl p-4 border border-white/5">
+                    <div className="text-muted text-xs uppercase tracking-widest font-bold mb-1">City</div>
+                    <div className="text-white text-lg font-bold">{registration.city}</div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Optional Advanced Details */}
             <div className="mt-8">

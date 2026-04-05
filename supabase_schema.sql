@@ -1,4 +1,4 @@
--- SQL for setting up Rakshak Tables in Supabase
+-- SQL for setting up initial Rakshak Tables in Supabase
 
 -- 1. Users Table
 CREATE TABLE users (
