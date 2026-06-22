@@ -52,13 +52,14 @@ The backend was prototyped against Supabase/PostgreSQL. That dependency was deli
 
 ## 1. The Problem
 
-India's Zepto and Blinkit riders are the most income-exposed workers in the gig economy, and nobody talks about it. A Zomato rider can switch zones when it rains. A Q-Commerce rider can't. He's assigned to one dark store, one 2 to 3 km radius. When that zone floods, overheats, or shuts down, he earns zero. No fallback, no claim process, no safety net.
+India's quick-commerce riders are among the most income-exposed workers in the gig economy, yet their financial vulnerability remains largely overlooked.
 
-This isn't a rare edge case. Chennai's northeast monsoon runs October through December. April through June brings heat indexes above 42 degrees Celsius. Unplanned bandhs happen without warning. These aren't freak events, they're structural income risk that hits the same riders, in the same zones, every year.
+Unlike food delivery riders, who can often switch delivery zones during disruptions, quick-commerce riders are typically assigned to a specific dark store and operate within a limited 2–3 km radius. When that zone is affected by flooding, extreme heat, poor air quality, civic restrictions, or temporary store closures, their earning opportunities disappear instantly. With no fallback mechanism, claims process, or financial safety net, a disrupted zone often means a complete loss of income.
 
-No insurance product currently addresses income loss for Q-Commerce riders specifically. We're building it.
+This is not an occasional problem—it is a recurring and predictable risk. Chennai's northeast monsoon impacts operations from October to December, summers regularly bring heat indices above 42°C, and civic shutdowns or local restrictions can occur without warning. These events repeatedly affect the same riders, in the same locations, year after year.
 
-**What we cover:** lost income due to external disruptions, extreme weather, severe air quality, civic shutdowns. Nothing else. No vehicle repair, no health, no accidents.
+Despite the scale of this issue, no insurance product today is specifically designed to protect quick-commerce riders from income loss caused by external disruptions. We are building a focused income protection solution that covers lost earnings resulting from extreme weather, severe air quality conditions, flooding, civic shutdowns, and other operational disruptions beyond a rider's control. To keep the coverage simple and relevant, it does not include vehicle repairs, medical expenses, health insurance, personal accidents, or property damage.
+
 
 ---
 
